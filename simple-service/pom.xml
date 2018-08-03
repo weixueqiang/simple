@@ -63,6 +63,17 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
 			<groupId>com.wxq</groupId>
 			<artifactId>simple-common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
