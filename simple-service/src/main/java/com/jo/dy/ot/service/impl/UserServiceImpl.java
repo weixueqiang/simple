@@ -20,7 +20,6 @@ public class UserServiceImpl implements UserService {
 	public void save(User user) {
 		int insert = userMapper.insertSelective(user);
 		System.out.println("Userservice--"+insert);
-		int i=1/0;
 	}
 
 }
