@@ -5,5 +5,7 @@ import com.jo.dy.ot.entity.User;
 public interface UserService {
 
 	void save(User user);
+
+	User get(int id);
 	
 }

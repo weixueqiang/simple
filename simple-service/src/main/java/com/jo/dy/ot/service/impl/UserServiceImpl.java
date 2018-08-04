@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import com.jo.dy.ot.dao.UserMapper;
 import com.jo.dy.ot.entity.User;
@@ -20,6 +21,11 @@ public class UserServiceImpl implements UserService {
 	public void save(User user) {
 		int insert = userMapper.insertSelective(user);
 		System.out.println("Userservice--"+insert);
+	}
+
+	@Override
+	public User get(int id) {
+		return userMapper.selectByPrimaryKey(id);
 	}
 
 }
