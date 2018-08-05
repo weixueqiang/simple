@@ -20,6 +20,15 @@
 		<div id="showPage_"></div>
 		<div id="showPage_list"></div>
 	</div>
+	<div>
+		<form action="${base}/permission/save" method="post">
+			name:<input name="name" /><br>
+			code:<input name="code" /><br>
+			createTime:<input name="createTime" /><br>
+			<input type="submit" value="提交"/>
+		</form>
+	</div>
+	
 </body>
 <script type="text/javascript" src="${base}/js/jquery.js"></script>
 <script type="text/javascript">

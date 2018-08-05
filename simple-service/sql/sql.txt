@@ -1,0 +1,7 @@
+create table permission(
+	id int auto_increment primary key,
+	name varchar(50),
+	code varchar(50),
+	status varchar(10),
+	create_time datetime
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;

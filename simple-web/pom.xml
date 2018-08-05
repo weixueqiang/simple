@@ -28,7 +28,7 @@
 			<artifactId>log4j</artifactId>
 		</dependency>
 		<!-- 日志 end -->
-
+		<!-- jsp start -->
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
@@ -42,7 +42,7 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
+		<!-- jsp end -->
 
 
 		<dependency>
@@ -65,7 +65,7 @@
 			<groupId>com.101tec</groupId>
 			<artifactId>zkclient</artifactId>
 		</dependency>
-		
+		<!-- json -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
@@ -80,7 +80,20 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 		</dependency>
-		
+		<!-- json -->
+
+		<!-- VO验证 -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+		</dependency>
+		<!-- VO验证 -->
+
+
 		<dependency>
 			<groupId>com.wxq</groupId>
 			<artifactId>simple-common</artifactId>

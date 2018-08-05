@@ -17,8 +17,18 @@
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 
 	<context:component-scan base-package="com.jo.dy.ot.controller"></context:component-scan>
-	<mvc:annotation-driven />
-	<!-- 在spring-mvc.xml中启用默认Servlet -->
+	
+	 <mvc:annotation-driven conversion-service="converService"/>
+	 
+	 <bean id="converService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<!-- 对时间进行转换 -->
+				<bean class="com.jo.dy.ot.util.DateConverter"></bean>
+			</list>
+		</property>
+	</bean> 
+	<!-- 在spring-mvc.xml中启用默认Servlet，过滤静态资源 -->
 	 <mvc:default-servlet-handler /> 
 
 	<bean
