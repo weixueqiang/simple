@@ -16,39 +16,10 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 
-	<context:component-scan base-package="com.jo.dy.ot.controller"></context:component-scan>
+	<context:component-scan base-package="com.jo">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
 	
-	 <mvc:annotation-driven conversion-service="converService"/>
 	 
-	 <aop:aspectj-autoproxy proxy-target-class="true"/> 
-	 
-	 <bean id="converService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-		<property name="converters">
-			<list>
-				<!-- 对时间进行转换 -->
-				<bean class="com.jo.dy.ot.util.DateConverter"></bean>
-				<bean class="com.jo.dy.ot.util.DoubleConverter"></bean>
-			</list>
-		</property>
-	</bean> 
-	<!-- 在spring-mvc.xml中启用默认Servlet，过滤静态资源 -->
-	 <mvc:default-servlet-handler /> 
-
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/jsp/" />
-		<property name="suffix" value=".jsp" />
-	</bean>
-
-
-	<bean class="org.springframework.http.converter.StringHttpMessageConverter">
-		<property name="supportedMediaTypes">
-			<list>
-				<value>text/html;charset=utf-8</value>
-				<value>*/*;charset=utf-8</value>
-				<value>application/json;charset=utf-8</value>
-			</list>
-		</property>
-	</bean>
-
 </beans>

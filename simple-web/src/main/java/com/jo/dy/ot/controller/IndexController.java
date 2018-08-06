@@ -49,5 +49,10 @@ public class IndexController {
 		return userService.showPage(page);
 	}
 	
+	@RequestMapping("ex")
+	@ResponseBody
+	public Result ex(Integer id) throws ClassNotFoundException {
+		throw new ClassNotFoundException();
+	}
 	
 }
