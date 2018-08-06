@@ -13,15 +13,12 @@ public class ObjectConver {
 	
 	private static final Logger log=Logger.getLogger(ObjectConver.class);
 	
-	@SuppressWarnings("unchecked")
 	public static <T> T conver(Object source, Class<T> target) {
 		if (source == null || target == null) {
 			return null;
 		}
 		try {
-			ClassLoader loader = ClassLoader.getSystemClassLoader();
-			Class<?> loadClass = loader.loadClass(target.getName());
-			T t = (T) loadClass.newInstance();
+			T t =  target.newInstance();
 			BeanUtils.copyProperties(source, t);
 			return t;
 		} catch (Exception e) {
@@ -30,7 +27,7 @@ public class ObjectConver {
 		return null;
 	}
 
-	public static <T> List<T> converList(List list,Class<T> target){
+	public static <T> List<T> converList(List<?> list,Class<T> target){
 		if(CollectionUtils.isEmpty(list)) {
 			return null;
 		}
