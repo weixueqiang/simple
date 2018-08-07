@@ -20,6 +20,8 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
         
+        <util:properties id="dbConfig" location="classpath:db.properties"></util:properties>
+        
         <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         	<property name="driverClassName" value="#{dbConfig.driver}"></property>
         	<property name="url" value="#{dbConfig.url}"></property>
@@ -29,7 +31,7 @@
         	<property name="maxActive" value="#{dbConfig.maxactive}"></property>
         </bean>
         
-        <util:properties id="dbConfig" location="classpath:db.properties"></util:properties>
+        
         <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="mapperLocations" value="classpath:mapper/*.xml"></property>
