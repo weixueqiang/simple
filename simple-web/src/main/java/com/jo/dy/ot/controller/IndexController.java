@@ -28,6 +28,7 @@ public class IndexController {
 	public String index(HttpServletRequest request) {
 //		User user=userService.get(1);
 //		request.setAttribute("user", user);
+		System.out.println("woqu!");
 		return "index";
 	}
 	

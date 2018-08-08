@@ -21,13 +21,20 @@
 		<div id="showPage_list"></div>
 	</div>
 	<div>
-		<form action="${base}/permission/save" method="post">
+		<form action="${base}/permission/save" method="post" >
 			name:<input name="name" /><br>
 			code:<input name="code" /><br>
 			createTime:<input name="createTime" /><br>
 			<input type="submit" value="提交"/>
 		</form>
 	</div>
+	<div>
+		<form action="${base}/common/upload" method="post" enctype= "multipart/form-data">
+			file:<input type="file" name="file" />
+			<input type="submit" value="提交"/>
+		</form>
+	</div>
+	
 	
 </body>
 <script type="text/javascript" src="${base}/js/jquery.js"></script>

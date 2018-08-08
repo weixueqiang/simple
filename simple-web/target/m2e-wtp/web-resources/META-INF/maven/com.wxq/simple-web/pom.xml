@@ -10,6 +10,11 @@
 	<artifactId>simple-web</artifactId>
 
 	<dependencies>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
+
 		<!-- spring start -->
 		<dependency>
 			<groupId>org.springframework</groupId>
