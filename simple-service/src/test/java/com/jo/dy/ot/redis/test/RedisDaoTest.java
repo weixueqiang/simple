@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.jo.dy.ot.entity.User;
 import com.jo.dy.ot.redis.dao.RedisDao;
+import com.jo.dy.ot.util.Constants;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath:spring/spring-redis.xml","classpath:spring/spring-service.xml","classpath:spring/spring-dao.xml"})
@@ -28,9 +29,9 @@ public class RedisDaoTest {
 		user.setId(12);
 		user.setPassword("password");
 		user.setSalt("haha");
-		user.setUsername("zs");
+		user.setUsername("z1s");
 		redisDao.save("user", user);
-		
+		redisDao.convertAndSend(Constants.REDIS_CHANNEL,Constants.REDIS_CHANNEL);
 	}
 	
 	@Test

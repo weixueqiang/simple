@@ -6,4 +6,5 @@ public interface RedisDao {
 	
 	Object get(String key);
 	
+	void convertAndSend(String channel,Object value);
 }

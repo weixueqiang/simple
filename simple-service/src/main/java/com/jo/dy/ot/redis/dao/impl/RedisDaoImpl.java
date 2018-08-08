@@ -20,4 +20,9 @@ public class RedisDaoImpl implements RedisDao{
 	public Object get(String key) {
 		return redisTemplate.opsForList().rightPop(key);
 	}
+
+	@Override
+	public void convertAndSend(String channel, Object value) {
+		redisTemplate.convertAndSend(channel, value);
+	}
 }
