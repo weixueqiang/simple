@@ -39,7 +39,7 @@ public class IndexController {
 			result.fail("id不能小于0");
 			return result;
 		}
-		result.setData(userService.get(id));
+		//result.setData(userService.get(id));
 		return result;
 	}
 	
