@@ -29,7 +29,7 @@ public class IndexController {
 //		User user=userService.get(1);
 //		request.setAttribute("user", user);
 		System.out.println("woqu!");
-		return "index";
+		return "indexs";
 	}
 	
 	@RequestMapping("showUser.do")
