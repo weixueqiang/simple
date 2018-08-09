@@ -51,13 +51,13 @@
 		</property>
 	</bean>
 
-	<!-- <mvc:interceptors>
+	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
 			<mvc:exclude-mapping path="/index.do"/>
 			<bean class="com.jo.dy.ot.interceptor.SimpleInterceptor"></bean>
 		</mvc:interceptor>
-	</mvc:interceptors> -->
+	</mvc:interceptors> 
 	
 	<!-- 上传附件 -->
 	<bean id="multipartResolver"

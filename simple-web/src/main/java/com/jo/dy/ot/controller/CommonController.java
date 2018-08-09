@@ -1,5 +1,8 @@
 package com.jo.dy.ot.controller;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,15 +21,21 @@ public class CommonController {
 
 	private Logger logger=Logger.getLogger(CommonController.class);
 	
+	/**
+	 * 简单地保存在部署的目录下
+	 * @date 2018年8月9日 上午11:10:57
+	 * @author weixueqiang
+	 */
 	@RequestMapping("upload")
-	public Result upload(@RequestParam("file") MultipartFile file,HttpServletRequest request) {
+	public Result upload(@RequestParam("file") MultipartFile file,HttpServletRequest request) throws Exception, IOException {
 		Result result = new Result();
 		String path2 = request.getContextPath();
 		ServletContext servletContext = ContextLoader.getCurrentWebApplicationContext().getServletContext();
 		String path = servletContext.getRealPath("/");
 		logger.info(String.format("路径一:%s,路径二:%s", path2,path));
-		logger.info("");
-		result.setData("hehe");
+		String filename = file.getOriginalFilename();
+		file.transferTo(new File(path+"/images/upload/"+filename));
+		result.setData("/images/upload/"+filename);
 		return result;
 	}
 	
