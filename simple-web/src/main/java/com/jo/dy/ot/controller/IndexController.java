@@ -4,6 +4,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,14 +27,19 @@ public class IndexController {
 	
 	@RequestMapping("index.do")
 	public String index(HttpServletRequest request) {
-//		User user=userService.get(1);
-//		request.setAttribute("user", user);
 		System.out.println("woqu!");
-		return "indexs";
+		return "index";
 	}
+	
+	@RequestMapping("center")
+	public String center() {
+		return "center";
+	}
+	
 	
 	@RequestMapping("showUser.do")
 	@ResponseBody
+	@RequiresPermissions("user:get")
 	public Result showUser(Integer id) {
 		Result result = new Result();
 		if(id<=0) {

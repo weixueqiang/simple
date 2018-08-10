@@ -22,5 +22,5 @@
 	</context:component-scan>
 	
 	<context:property-placeholder location="classpath:config.properties"/>
-	 
+	
 </beans>

@@ -1,0 +1,34 @@
+package com.jo.dy.ot.controller;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.jo.dy.ot.shiro.MyUsernamePasswordToken;
+import com.jo.dy.ot.util.Result;
+
+@RestController
+public class LoginController {
+
+	@RequestMapping("/login")
+	public Result login(String username,String password) {
+		Result result = new Result();
+		if(StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
+			result.fail("密码或用户名不能为空!");
+			return result;
+		}
+		MyUsernamePasswordToken token = new MyUsernamePasswordToken(username,password);
+		Subject subject = SecurityUtils.getSubject();
+		if(!subject.isAuthenticated()) {
+			try {
+				subject.login(token);
+			} catch (Exception e) {
+				result.fail(e.getMessage());
+			}
+		}
+		return result;
+	}
+	
+}

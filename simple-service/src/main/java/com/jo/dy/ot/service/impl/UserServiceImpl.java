@@ -1,6 +1,8 @@
 package com.jo.dy.ot.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -46,5 +48,21 @@ public class UserServiceImpl implements UserService {
 		page.setCount((int)info.getTotal());
 		return page;
 	}
+
+	@Override
+	public User getByName(String username) {
+		return users.get(username);
+	}
+	
+	private static Map<String,User> users=new HashMap<>();
+	static {
+		String username="zhangsan";
+		users.put(username, new User(1, username, "zs123", "dafd"));
+		username="lisi";
+		users.put(username, new User(1, username, "ls123", "dafd2"));
+		username="wangwu";
+		users.put(username, new User(1, username, "ww123", "dafd3"));
+	}
+	
 
 }

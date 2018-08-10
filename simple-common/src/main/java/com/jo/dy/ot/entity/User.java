@@ -19,7 +19,18 @@ public class User implements Serializable{
         this.id = id;
     }
 
-    public String getUsername() {
+    public User() {
+    	
+    }
+    public User(Integer id, String username, String password, String salt) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.salt = salt;
+	}
+
+	public String getUsername() {
         return username;
     }
 

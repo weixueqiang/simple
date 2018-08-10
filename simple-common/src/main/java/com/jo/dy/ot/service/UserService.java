@@ -10,5 +10,7 @@ public interface UserService {
 	User get(int id);
 
 	PageUtils<User> showPage(PageUtils<User> page);
+
+	User getByName(String username);
 	
 }

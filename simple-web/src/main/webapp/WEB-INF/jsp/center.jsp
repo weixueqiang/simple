@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>index___</h1>
+	<h1>center___</h1>
 	<div>
 		<div id="showUser">
 			id:<input type="text" /><input type="button" value="ajax显示一个用户" />
