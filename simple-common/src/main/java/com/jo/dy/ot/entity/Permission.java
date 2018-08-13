@@ -14,7 +14,28 @@ public class Permission implements Serializable{
 
     private Date createTime;
 
-    public Integer getId() {
+    public Permission(Integer id, String name, String code, String status, Date createTime) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.code = code;
+		this.status = status;
+		this.createTime = createTime;
+	}
+
+	public Permission(Integer id, String name, String code) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.code = code;
+	}
+
+	public Permission() {
+		super();
+		  // TODO Auto-generated constructor stub
+	}
+
+	public Integer getId() {
         return id;
     }
 

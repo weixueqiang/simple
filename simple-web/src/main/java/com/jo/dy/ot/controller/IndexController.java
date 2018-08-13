@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jo.dy.ot.entity.User;
 import com.jo.dy.ot.service.UserService;
+import com.jo.dy.ot.util.MyUtils;
 import com.jo.dy.ot.util.PageUtils;
 import com.jo.dy.ot.util.Result;
 
@@ -36,6 +37,13 @@ public class IndexController {
 		return "center";
 	}
 	
+	@RequestMapping("myInfo")
+	@ResponseBody
+	public Result myInfo() {
+		Result result = new Result();
+		result.setData(MyUtils.getUser());
+		return result;
+	}
 	
 	@RequestMapping("showUser.do")
 	@ResponseBody
@@ -58,6 +66,7 @@ public class IndexController {
 	
 	@RequestMapping("ex")
 	@ResponseBody
+	@RequiresPermissions("user:ex")
 	public Result ex(Integer id) throws ClassNotFoundException {
 		throw new ClassNotFoundException();
 	}

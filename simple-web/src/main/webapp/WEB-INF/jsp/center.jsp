@@ -10,6 +10,9 @@
 </head>
 <body>
 	<h1>center___</h1>
+	<div id="myInfo">
+	
+	</div>
 	<div>
 		<div id="showUser">
 			id:<input type="text" /><input type="button" value="ajax显示一个用户" />
@@ -75,6 +78,21 @@
 		})
 	})
 
+	$.ajax({
+		"url":"${base}/myInfo",
+		"type":"get",
+		"datatype":"json",
+		"success":function(obj){
+			var html='';
+			if(obj.success){
+				html=obj.data.id+'__'+obj.data.username+'__'+obj.data.password+'__';
+			}else{
+				html=obj.msg;
+			}
+			$("#myInfo").html(html);
+		}
+	});
+	
 	$("#showUser").find("input").eq(1).click(
 			function() {
 				var id = $("#showUser").find("input").eq(0).val();

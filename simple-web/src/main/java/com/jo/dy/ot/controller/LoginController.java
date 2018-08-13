@@ -2,7 +2,11 @@ package com.jo.dy.ot.controller;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.LockedAccountException;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.subject.Subject;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +28,13 @@ public class LoginController {
 		if(!subject.isAuthenticated()) {
 			try {
 				subject.login(token);
-			} catch (Exception e) {
+			}catch(LockedAccountException e) {
+				
+			}catch(UnknownAccountException e) {
+				
+			}catch(IncorrectCredentialsException e) {
+				
+			}catch (Exception e) {
 				result.fail(e.getMessage());
 			}
 		}
