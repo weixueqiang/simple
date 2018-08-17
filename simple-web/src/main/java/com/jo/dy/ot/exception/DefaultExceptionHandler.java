@@ -3,6 +3,7 @@ package com.jo.dy.ot.exception;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.ShiroException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,7 +23,12 @@ public class DefaultExceptionHandler implements HandlerExceptionResolver {
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
 			Exception ex) {
 		ModelAndView view = new ModelAndView();
-		if(ex instanceof RuntimeException) {
+		if(ex instanceof ShiroException) {
+			MappingJackson2JsonView jsonView=new MappingJackson2JsonView();
+			jsonView.addStaticAttribute("success", false);
+			jsonView.addStaticAttribute("msg", "没有权限");
+			view.setView(jsonView);
+		}else if(ex instanceof RuntimeException) {
 			MappingJackson2JsonView jsonView=new MappingJackson2JsonView();
 			jsonView.addStaticAttribute("success", false);
 			jsonView.addStaticAttribute("msg", "RuntimeException");

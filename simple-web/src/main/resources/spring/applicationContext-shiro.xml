@@ -7,7 +7,7 @@
 	<bean id="securityManager"
 		class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="myRealm" />
-		<property name="cacheManager" ref="cacheManager"></property>
+		<!-- <property name="cacheManager" ref="cacheManager"></property> -->
 	</bean>
 	<!-- 缓存管理器 -->
 	<bean id="cacheManager"
@@ -27,15 +27,25 @@
 		<property name="successUrl" value="/success.do" />
 		<property name="unauthorizedUrl" value="/refuse.jsp"></property>
 		<!-- 具体配置需要拦截哪些 URL, 以及访问对应的 URL 时使用 Shiro 的什么 Filter 进行拦截. -->
-		<property name="filterChainDefinitions">
+		 <property name="filterChainDefinitions">
 			<value>
-				/index.do=anon
-				/login=anon
-				/logout=logout
+				/index.do:anon
+				/login:anon
+				/logout:logout
 				/js/*.js=anon
 				/**=authc
 			</value>
 		</property>
+		<!-- 直接给 filterChainDefinitionMap赋值,上一种方式采用间接给filterChainDefinitionMap赋值-->
+		<!--  <property name="filterChainDefinitionMap">
+			<map>
+				<entry key="/index.do" value="anon"></entry>
+				<entry key="/login" value="anon"></entry>
+				<entry key="/logout" value="logout"></entry>
+				<entry key="/js/*.js" value="anon"></entry>
+				<entry key="/**" value="authc"></entry>
+			</map>
+		</property> -->
 	</bean>
 
 	<bean

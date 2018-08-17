@@ -12,7 +12,7 @@ import com.jo.dy.ot.service.UserService;
 import com.jo.dy.ot.util.PageUtils;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:spring/spring-dao.xml","classpath:spring/spring-service.xml"})
+@ContextConfiguration({"classpath:spring/spring-dao.xml","classpath:spring/spring-service.xml","classpath:spring/spring-redis.xml"})
 public class UserServiceTest {
 
 	@Resource
@@ -39,8 +39,12 @@ public class UserServiceTest {
 	@Test
 	public void pageTest() {
 		PageUtils<User> page = new PageUtils<User>();
+		page.setPage(5);
 		page.setLimit(5);
 		PageUtils<User> showPage = userService.showPage(page);
-		System.out.println(showPage);
+		System.out.println("...>>>>>>>>>\n");
+		showPage.getData().forEach((e)->System.out.println(e));
+		System.out.println("...>>>>>>>>>\n");
+		System.out.println(showPage.isEmpty());
 	}
 }

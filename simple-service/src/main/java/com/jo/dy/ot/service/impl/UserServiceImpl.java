@@ -42,11 +42,12 @@ public class UserServiceImpl implements UserService {
 	public PageUtils<User> showPage(PageUtils<User> page) {
 		
 		PageHelper.startPage(page.getPage(), page.getLimit());
-		List<User> selectByExample = userMapper.selectByExample(new UserExample());
+	/*	List<User> selectByExample = userMapper.selectByExample(new UserExample());
 		PageInfo<User> info=new PageInfo<User>(selectByExample);
 		page.setData(selectByExample);
-		page.setCount((int)info.getTotal());
-		return page;
+		page.setCount((int)info.getTotal());*/
+		Page<User> list=(Page<User>)userMapper.selectByExample(new UserExample());
+		return page.conver(list);
 	}
 
 	@Override

@@ -20,6 +20,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import com.jo.dy.ot.entity.Permission;
 import com.jo.dy.ot.entity.User;
@@ -39,7 +40,9 @@ public class MyRealm extends AuthorizingRealm{
 		List<Permission> permission = permissions.get(user.getId());
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		Set<String> stringPermissions=new HashSet<>();
-		permission.forEach((e)->stringPermissions.add(e.getCode()));
+		if(!CollectionUtils.isEmpty(permission)) {
+			permission.forEach((e)->stringPermissions.add(e.getCode()));
+		}
 		info.setStringPermissions(stringPermissions);
 		return info;
 	}
