@@ -25,7 +25,11 @@ public class PermissionController {
 //	@Resource
 	private PermissionService permissionService;
 	
-	
+	/**
+	 * 数据校验测试
+	 * @date 2018年8月17日 下午5:44:32
+	 * @author weixueqiang
+	 */
 	@RequestMapping("/save")
 	@ResponseBody
 	public Result save(@Valid PermissionVO permissionVO,BindingResult bindingResult) {

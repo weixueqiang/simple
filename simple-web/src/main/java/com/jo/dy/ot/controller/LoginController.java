@@ -29,11 +29,11 @@ public class LoginController {
 			try {
 				subject.login(token);
 			}catch(LockedAccountException e) {
-				
+				result.fail("用户被锁定");
 			}catch(UnknownAccountException e) {
-				
+				result.fail("不存在该账户");
 			}catch(IncorrectCredentialsException e) {
-				
+				result.fail("凭证错误");
 			}catch (Exception e) {
 				result.fail(e.getMessage());
 			}

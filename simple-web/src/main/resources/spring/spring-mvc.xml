@@ -35,6 +35,7 @@
 				<!-- 对时间进行转换 -->
 				<bean class="com.jo.dy.ot.util.DateConverter"></bean>
 				<bean class="com.jo.dy.ot.util.DoubleConverter"></bean>
+				<bean class="com.jo.dy.ot.util.IntegerConverter"></bean>
 			</list>
 		</property>
 	</bean>

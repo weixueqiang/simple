@@ -26,12 +26,21 @@ public class IndexController {
 		System.out.println("控制器初始化了！");
 	}
 	
+	/**
+	 * 返回登录页面,未认证主动跳转该请求
+	 * @date 2018年8月17日 下午5:39:00
+	 * @author weixueqiang
+	 */
 	@RequestMapping("index.do")
 	public String index(HttpServletRequest request) {
-		System.out.println("woqu!");
 		return "index";
 	}
 	
+	/**
+	 * 用户中心,登录页面登录成功后自动加载该页面
+	 * @date 2018年8月17日 下午5:40:23
+	 * @author weixueqiang
+	 */
 	@RequestMapping("center")
 	public String center() {
 		return "center";
@@ -40,6 +49,19 @@ public class IndexController {
 	@RequestMapping("myInfo")
 	@ResponseBody
 	public Result myInfo() {
+		Result result = new Result();
+		result.setData(MyUtils.getUser());
+		return result;
+	}
+	
+	/**
+	 * token登录演示
+	 * @date 2018年8月17日 下午5:41:16
+	 * @author weixueqiang
+	 */
+	@RequestMapping("token")
+	@ResponseBody
+	public Result tokenTest() {
 		Result result = new Result();
 		result.setData(MyUtils.getUser());
 		return result;
@@ -58,12 +80,22 @@ public class IndexController {
 		return result;
 	}
 	
+	/**
+	 * 分页演示
+	 * @date 2018年8月17日 下午5:41:34
+	 * @author weixueqiang
+	 */
 	@RequestMapping("showPage.do")
 	@ResponseBody
 	public PageUtils<User> showPage(PageUtils<User> page) {
 		return userService.showPage(page);
 	}
 	
+	/**
+	 * 异常演示
+	 * @date 2018年8月17日 下午5:41:47
+	 * @author weixueqiang
+	 */
 	@RequestMapping("ex")
 	@ResponseBody
 	@RequiresPermissions("user:ex")
