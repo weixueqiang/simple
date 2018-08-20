@@ -9,6 +9,8 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import com.jo.dy.ot.util.BaseController;
+
 /**
  * 无需其它配置,仅需作为组件扫描到即可
  * 
@@ -16,8 +18,8 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
  * @version 1.0.0
  * @date 2018年8月6日 下午5:27:42
  */
-@Component
-public class DefaultExceptionHandler implements HandlerExceptionResolver {
+//@Component
+public class DefaultExceptionHandler extends BaseController implements HandlerExceptionResolver {
 
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,

@@ -6,17 +6,21 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.jo.dy.ot.entity.User;
 import com.jo.dy.ot.service.UserService;
+import com.jo.dy.ot.util.BaseController;
 import com.jo.dy.ot.util.MyUtils;
 import com.jo.dy.ot.util.PageUtils;
 import com.jo.dy.ot.util.Result;
 
 @Controller
-public class IndexController {
+public class IndexController extends BaseController{
 
 //	@Resource
 	private UserService userService;
@@ -102,5 +106,15 @@ public class IndexController {
 	public Result ex(Integer id) throws ClassNotFoundException {
 		throw new ClassNotFoundException();
 	}
+	
+	/*@ExceptionHandler(value=Exception.class)
+	public ModelAndView handlerException(Exception exception) {
+		ModelAndView view=new ModelAndView();
+		MappingJackson2JsonView jsonView=new MappingJackson2JsonView();
+		jsonView.addStaticAttribute("success", false);
+		jsonView.addStaticAttribute("msg", "发生异常");
+		view.setView(jsonView);
+		return view;
+	}*/
 	
 }

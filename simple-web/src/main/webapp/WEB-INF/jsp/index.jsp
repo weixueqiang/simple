@@ -20,6 +20,9 @@
 		</form>
 	</div>
 	<a href="${base }/logout">退出</a>
+	<div>
+	
+	</div>
 </body>
 <script type="text/javascript" src="${base}/js/jquery.js"></script>
 <script type="text/javascript">
@@ -42,6 +45,7 @@
 			})
 		})
 	})
+   
 </script>
 
 </html>

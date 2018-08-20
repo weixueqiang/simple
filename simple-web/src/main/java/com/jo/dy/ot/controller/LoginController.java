@@ -24,6 +24,7 @@ public class LoginController {
 			return result;
 		}
 		MyUsernamePasswordToken token = new MyUsernamePasswordToken(username,password);
+		token.setRememberMe(true);
 		Subject subject = SecurityUtils.getSubject();
 		if(!subject.isAuthenticated()) {
 			try {

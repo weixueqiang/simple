@@ -23,16 +23,15 @@
 	<context:component-scan
 		base-package="com.jo.dy.ot.controller"></context:component-scan>
 
-	<mvc:annotation-driven
-		conversion-service="converService" />
-
+	<!-- <mvc:annotation-driven /> -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />
-
+	 <mvc:annotation-driven
+		conversion-service="converService" />
+	<!-- 未使用 -->
 	<bean id="converService"
 		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 		<property name="converters">
 			<list>
-				<!-- 对时间进行转换 -->
 				<bean class="com.jo.dy.ot.util.DateConverter"></bean>
 				<bean class="com.jo.dy.ot.util.DoubleConverter"></bean>
 				<bean class="com.jo.dy.ot.util.IntegerConverter"></bean>
@@ -46,7 +45,9 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
-	</bean>
+	</bean> 
+
+
 
 	 <bean
 		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
@@ -79,5 +80,6 @@
 		<property name="maxUploadSize" value="20971520" />
 		<property name="defaultEncoding" value="utf-8" />
 	</bean>
+
 
 </beans>
