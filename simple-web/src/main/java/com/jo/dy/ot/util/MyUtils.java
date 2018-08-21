@@ -10,14 +10,11 @@ public class MyUtils {
 
 	public static MyPrincipal curMyPrincipal() {
 		Subject subject = SecurityUtils.getSubject();
-		if(!subject.isAuthenticated()) {
-			return null;
-		}
 		return (MyPrincipal)subject.getPrincipal();
 	}
 	
 	public static User getUser() {
-		return curMyPrincipal()==null ? null:curMyPrincipal().getUser();
+		return curMyPrincipal().getUser();
 	}
 	
 }

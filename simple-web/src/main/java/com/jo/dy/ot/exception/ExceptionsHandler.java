@@ -2,16 +2,43 @@ package com.jo.dy.ot.exception;
 
 import org.apache.shiro.ShiroException;
 import org.springframework.validation.BindException;
-import org.springframework.validation.BindingErrorProcessor;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import com.jo.dy.ot.util.Result;
+/**
+ * @ControllerAdvice是一个@Component，用于定义@ExceptionHandler，@InitBinder和@ModelAttribute方法，适用于所有使用@RequestMapping方法
+ * 能捕获控制前框架抛出的错误,避免给前端展示不友好的界面.
+ * @author  weixueqiang
+ * @version 1.0.0
+ * @date 2018年8月21日 上午10:03:11
+ */
 @ControllerAdvice
 public class ExceptionsHandler {
 
-    @ExceptionHandler(Exception.class)//可以直接写@EceptionHandler，IOExeption继承于Exception
+	private static final String ERROR_MSG="发生异常,请稍后重试!";
+	
+	@ExceptionHandler(value=Exception.class)
+	@ResponseBody
+	public Result exceptionHandler(Exception ex) {
+		Result result = new Result();
+		if(ex instanceof ShiroException) {
+			result.fail("没有权限!");
+		}else if(ex instanceof BindException) {
+			result.fail("参数异常!");
+		}else if(ex instanceof RuntimeException) {
+			result.fail(ERROR_MSG);
+		}else {
+			result.fail(ERROR_MSG);
+		}
+		return result;
+	}
+	
+	
+//    @ExceptionHandler(Exception.class)
     public ModelAndView allExceptionHandler(Exception ex){
     	ModelAndView view = new ModelAndView();
 		if(ex instanceof ShiroException) {
@@ -37,4 +64,5 @@ public class ExceptionsHandler {
 		}
 		 return view;
     }
+    
 }
