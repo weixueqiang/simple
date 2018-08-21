@@ -25,7 +25,7 @@
 
 	<!-- <mvc:annotation-driven /> -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />
-	 <mvc:annotation-driven
+	<mvc:annotation-driven
 		conversion-service="converService" />
 	<!-- 未使用 -->
 	<bean id="converService"
@@ -45,25 +45,42 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
-	</bean> 
+	</bean>
 
 
 
-	 <bean
+	<bean
 		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
 		<property name="securityManager" ref="securityManager" />
 	</bean>
 
-	<bean
-		class="org.springframework.http.converter.StringHttpMessageConverter">
-		<property name="supportedMediaTypes">
-			<list>
-				<value>text/html;charset=utf-8</value>
-				<value>*/*;charset=utf-8</value>
-				<value>application/json;charset=utf-8</value>
-			</list>
-		</property>
-	</bean>
+	<!-- <bean class="org.springframework.http.converter.StringHttpMessageConverter"> 
+		<property name="supportedMediaTypes"> <list> <value>text/html;charset=utf-8</value> 
+		<value>*/*;charset=utf-8</value> <value>application/json;charset=utf-8</value> 
+		</list> </property> </bean> -->
+
+	<!-- json 设置 -->
+	 <mvc:annotation-driven>
+        <mvc:message-converters>  
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"> 
+                <property name="objectMapper"> 
+                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                        <!-- 处理responseBody 里面日期类型 --> 
+                        <property name="dateFormat"> 
+                            <bean class="java.text.SimpleDateFormat"> 
+                                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" /> 
+                            </bean> 
+                        </property> 
+                        <!-- 为null字段时不显示 -->
+                        <property name="serializationInclusion">
+                            <value type="com.fasterxml.jackson.annotation.JsonInclude.Include">NON_NULL</value>
+                        </property> 
+                    </bean> 
+                </property> 
+            </bean> 
+       </mvc:message-converters> 
+    </mvc:annotation-driven>
+
 
 	<mvc:interceptors>
 		<mvc:interceptor>
@@ -80,6 +97,7 @@
 		<property name="maxUploadSize" value="20971520" />
 		<property name="defaultEncoding" value="utf-8" />
 	</bean>
+
 
 
 </beans>

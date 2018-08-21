@@ -1,6 +1,7 @@
 package log.test;
 
 import org.junit.Test;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
 public class AllTest {
 
@@ -8,6 +9,7 @@ public class AllTest {
 	public void annoClassTest() {
 		AnnoClassTest annoClassTest = new AnnoClassTest();
 //		annoClassTest.
+//		MappingJackson2HttpMessageConverter
 	}
 	
 	

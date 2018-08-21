@@ -1,5 +1,7 @@
 package com.jo.dy.ot.controller;
 
+import java.util.Date;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -39,6 +41,7 @@ public class LoginController {
 				result.fail(e.getMessage());
 			}
 		}
+		result.setData(new Date());
 		return result;
 	}
 	

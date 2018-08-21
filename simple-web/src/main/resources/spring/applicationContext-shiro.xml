@@ -8,6 +8,7 @@
 		class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="sessionManager" ref="sessionManager"></property>
 		<property name="realm" ref="myRealm" />
+		<property name="rememberMeManager" ref="rememberMeManager" /> 
 		<!-- <property name="cacheManager" ref="cacheManager"></property> -->
 	</bean>
 	<!-- 缓存管理器 -->
@@ -51,9 +52,27 @@
 			key="/**" value="authc"></entry> </map> </property> -->
 	</bean>
 
+<!-- rememberMeManager管理器，写cookie，取出cookie生成用户信息 -->
+	<bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+		<property name="cookie" ref="rememberMeCookie" />
+	</bean>
+	<!-- 记住我cookie -->
+	<bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+		<!-- rememberMe是cookie的名字 -->
+		<property name="name" value="shiro.sesssion"/>
+		<constructor-arg value="rememberMe" />
+		<!-- 记住我cookie生效时间30天 -->
+		<property name="maxAge" value="2592000" />
+	</bean>
 	<bean id="sessionManager"
 		class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+		<!-- 不在地址栏中返回sessionId -->
 		<property name="sessionIdUrlRewritingEnabled" value="false" />
+		 <!-- session的失效时长，单位毫秒 -->
+        <property name="globalSessionTimeout" value="600000"/>
+        <!-- 删除失效的session -->
+        <property name="deleteInvalidSessions" value="true"/>
+        <property name="sessionIdCookie" ref="rememberMeCookie"/>
 	</bean>
 
 	<bean
