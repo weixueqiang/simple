@@ -1,5 +1,8 @@
 package com.jo.dy.ot.exception;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
 import org.apache.shiro.ShiroException;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -9,9 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.jo.dy.ot.util.Result;
+import com.jo.dy.ot.util.SendEmailUtils;
 /**
  * @ControllerAdvice是一个@Component，用于定义@ExceptionHandler，@InitBinder和@ModelAttribute方法，适用于所有使用@RequestMapping方法
- * 能捕获控制前框架抛出的错误,避免给前端展示不友好的界面.
+ * 能捕获控制前框架抛出的错误,避免给前端展示不友好的界面,推荐使用
  * @author  weixueqiang
  * @version 1.0.0
  * @date 2018年8月21日 上午10:03:11
@@ -31,6 +35,14 @@ public class ExceptionsHandler {
 			result.fail("参数异常!");
 		}else if(ex instanceof RuntimeException) {
 			result.fail(ERROR_MSG);
+			/*MimeMessage message = SendEmailUtils.getMimeMessage();
+			try {
+				message.setSubject("程序出现异常!");
+				message.setText(ex.getMessage());
+				SendEmailUtils.send(message, "903690574@qq.com");
+			} catch (Exception e) {
+				   e.printStackTrace();
+			}*/
 		}else {
 			result.fail(ERROR_MSG);
 		}
