@@ -22,7 +22,7 @@ import com.jo.dy.ot.util.Result;
 @Controller
 public class IndexController extends BaseController{
 
-//	@Resource
+	@Resource
 	private UserService userService;
 	
 	@PostConstruct
@@ -80,7 +80,7 @@ public class IndexController extends BaseController{
 			result.fail("id不能小于0");
 			return result;
 		}
-		//result.setData(userService.get(id));
+		result.setData(userService.get(id));
 		return result;
 	}
 	

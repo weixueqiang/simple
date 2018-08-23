@@ -16,6 +16,7 @@ import com.github.pagehelper.PageInfo;
 import com.jo.dy.ot.dao.UserMapper;
 import com.jo.dy.ot.entity.User;
 import com.jo.dy.ot.entity.UserExample;
+import com.jo.dy.ot.service.OtherService;
 import com.jo.dy.ot.service.UserService;
 import com.jo.dy.ot.util.PageUtils;
 
@@ -24,7 +25,8 @@ public class UserServiceImpl implements UserService {
 
 	@Resource
 	private UserMapper userMapper;
-	
+	@Resource
+	private OtherService otherService;
 	
 	@Override
 	@Transactional(rollbackFor=Exception.class)
@@ -35,6 +37,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User get(int id) {
+		String string = otherService.say("zhangsan");
+		System.err.println(string);
+		System.err.println();
 		return userMapper.selectByPrimaryKey(id);
 	}
 

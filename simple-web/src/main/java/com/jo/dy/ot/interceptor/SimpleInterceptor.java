@@ -14,20 +14,20 @@ public class SimpleInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		logger.info("拦截器拦截.......\n");
+		logger.info("拦截器拦截.......");
 		return true;
 	}
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		logger.info("拦截器返回视图.......\n");
+		logger.info("拦截器返回视图.......");
 	}
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-		logger.info("拦截器结束.......\n");  
+		logger.info("拦截器结束.......");  
 	}
 
 }

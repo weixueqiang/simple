@@ -11,7 +11,7 @@
     <!-- 使用zookeeper注册中心暴露服务地址 -->  
     <!-- 用dubbo协议在20880端口暴露服务 -->  
     <!-- 声明需要暴露的服务接口 -->  
-    <dubbo:application name="dubbo_provider"  />  
+    <dubbo:application name="other_dubbo_provider"  />  
 
     <!-- <dubbo:registry address="zookeeper://192.168.93.131:2181" />  --> 
     <dubbo:registry address="zookeeper://localhost:2181" />  
@@ -19,8 +19,8 @@
     <dubbo:provider filter="myDubboFilter"></dubbo:provider> 
     <dubbo:consumer filter="myDubboFilter" check="false"></dubbo:consumer>
 
-    <dubbo:protocol name="dubbo" port="20880" />  
+    <dubbo:protocol name="dubbo" port="20881" />  
 
-    <dubbo:service interface="com.jo.dy.ot.service.UserService" ref="userService" cache="lru" />
-    <dubbo:reference interface="com.jo.dy.ot.service.OtherService" id="otherService" url="dubbo://localhost:20881"/>
+    <dubbo:service interface="com.jo.dy.ot.service.OtherService" ref="otherService" cache="lru" />
+    <dubbo:reference interface="com.jo.dy.ot.service.UserService" id="userService" url="dubbo://localhost:20880"></dubbo:reference>
 </beans>

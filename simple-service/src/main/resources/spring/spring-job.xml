@@ -10,10 +10,10 @@
                         http://www.dangdang.com/schema/ddframe/job/job.xsd">
    
     <!--配置作业注册中心   -->
-    <reg:zookeeper id="regCenter"  server-lists="localhost:2181" namespace="erp-job" base-sleep-time-milliseconds="1000" max-sleep-time-milliseconds="3000" max-retries="3" />
-    <!-- 0 0 0 * * ? -->
+<!--     <reg:zookeeper id="regCenter"  server-lists="localhost:2181" namespace="erp-job" base-sleep-time-milliseconds="1000" max-sleep-time-milliseconds="3000" max-retries="3" />
+    0 0 0 * * ?
     <job:simple id="customerFollowElasticJob"  class="com.jo.dy.ot.job.CustomerFollowElasticJob" 
     registry-center-ref="regCenter" cron="1/10 * * * * ?" 
-    	sharding-total-count="1"   description="这里是描述" />
+    	sharding-total-count="1"   description="这里是描述" /> -->
     <!-- 配置作业-->
 </beans>

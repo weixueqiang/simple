@@ -256,6 +256,5 @@
 		<module>simple-web</module>
 		<module>simple-common</module>
 		<module>simple-service</module>
-		<module>other-simple-service</module>
 	</modules>
 </project>
