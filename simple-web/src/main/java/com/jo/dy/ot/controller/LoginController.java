@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jo.dy.ot.enums.LoginTypeEnmu;
 import com.jo.dy.ot.shiro.MyUsernamePasswordToken;
 import com.jo.dy.ot.util.Result;
 
@@ -25,7 +26,7 @@ public class LoginController {
 			result.fail("密码或用户名不能为空!");
 			return result;
 		}
-		MyUsernamePasswordToken token = new MyUsernamePasswordToken(username,password);
+		MyUsernamePasswordToken token = new MyUsernamePasswordToken(username,password,LoginTypeEnmu.PASSWORD);
 //		token.setRememberMe(true);
 		Subject subject = SecurityUtils.getSubject();
 		if(!subject.isAuthenticated()) {

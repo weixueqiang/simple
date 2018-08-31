@@ -11,6 +11,16 @@
 		 <property name="rememberMeManager" ref="rememberMeManager" />
 		<property name="cacheManager" ref="cacheManager"></property> 
 	</bean>
+	
+	<bean id="myRealm" class="com.jo.dy.ot.shiro.MyRealm">
+		<property name="credentialsMatcher" ref="credentialsMatcher"></property>
+	</bean>
+	<bean id="credentialsMatcher"
+	class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+	<property name="hashAlgorithmName" value="md5" />
+	<property name="hashIterations" value="1" />
+</bean>
+	
 	<!-- 缓存管理器 -->
 	<bean id="cacheManager"
 		class="org.apache.shiro.cache.ehcache.EhCacheManager">

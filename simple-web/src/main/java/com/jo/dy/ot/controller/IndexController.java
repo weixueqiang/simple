@@ -22,7 +22,7 @@ import com.jo.dy.ot.util.Result;
 @Controller
 public class IndexController extends BaseController{
 
-	@Resource
+	//@Resource
 	private UserService userService;
 	
 	@PostConstruct
