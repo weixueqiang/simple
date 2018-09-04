@@ -6,6 +6,8 @@ import java.util.Date;
 import org.junit.Test;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
+import com.jo.dy.ot.util.SHA1;
+
 public class AllTest {
 
 	@Test
@@ -27,6 +29,29 @@ public class AllTest {
     	cal.set(Calendar.MONTH, Calendar.JANUARY);
 		cal.set(Calendar.DATE, 1);
     	System.out.println(cal.getTime().getTime());
+	}
+	
+	@Test
+	public void test() {
+		int index=16 >> 4;
+		System.out.println(index);//1
+		
+		System.out.println(Byte.MIN_VALUE);//
+		System.out.println(Byte.MAX_VALUE);//0111 1111
+		
+		System.out.println(Integer.toBinaryString(Byte.MIN_VALUE));
+		System.out.println(Integer.toBinaryString(Byte.MAX_VALUE));
+	}
+
+	@Test
+	public void digestTest() {
+		String[] passwords= {"zs123","ls123","ww123"};
+		String salt="salt";
+		for(String pw:passwords) {
+			System.out.println(SHA1.digest(pw+salt));
+		}
+		
+		
 	}
 	
 	

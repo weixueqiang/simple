@@ -67,11 +67,11 @@ public class MyRealm extends AuthorizingRealm {
 	private static Map<Integer, List<Permission>> permissions = new HashMap<>();
 	static {
 		String username = "zhangsan";
-		users.put(username, new User(1, username, "af3dbe92220332eacee19be7aed6f503", "salt"));
+		users.put(username, new User(1, username, "3f503bde9ea1d0acb3bfc98e4b58c97c149b3fa6", "salt"));
 		username = "lisi";
-		users.put(username, new User(2, username, "bafc3188fef9cf9ddda7fd8913c2c0ec", "salt"));
+		users.put(username, new User(2, username, "18d9baadcddac71fefb5ce20a5cbfb281fcc71e", "salt"));
 		username = "wangwu";
-		users.put(username, new User(3, username, "634cd40d6db0ec6826808bbc7a98de33", "salt"));
+		users.put(username, new User(3, username, "331043e9c170b0a3dc7c98cd169ba28a1b8296c3", "salt"));
 
 		List<Permission> list = new ArrayList<>();
 		list.add(new Permission(1, "获取用户", "user:get"));

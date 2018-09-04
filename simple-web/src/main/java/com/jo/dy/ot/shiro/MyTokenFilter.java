@@ -18,37 +18,39 @@ import org.apache.shiro.web.filter.AccessControlFilter;
 
 import com.jo.dy.ot.entity.Permission;
 import com.jo.dy.ot.entity.User;
+import com.jo.dy.ot.enums.LoginTypeEnmu;
 import com.jo.dy.ot.util.Constants;
 
 public class MyTokenFilter extends AccessControlFilter {
 
-	private static Logger logger=Logger.getLogger(MyTokenFilter.class);
-	
+	private static Logger logger = Logger.getLogger(MyTokenFilter.class);
+
 	@Override
 	protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue)
 			throws Exception {
 		Subject subject = SecurityUtils.getSubject();
-		if(subject.isAuthenticated()) {
+		if (subject.isAuthenticated()) {
 			return true;
 		}
-		HttpServletRequest req=(HttpServletRequest)request;
+		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		String token = req.getHeader(Constants.TOKEN);
-		if(StringUtils.isBlank(token)) {
+		if (StringUtils.isBlank(token)) {
 			logger.warn("未发现token!");
 			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			return false;
 		}
 		User user = users.get(token);
-		if(user==null) {
+		if (user == null) {
 			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			return false;
 		}
-		MyUsernamePasswordToken myToken = new MyUsernamePasswordToken(user.getUsername(),user.getPassword());
+		MyUsernamePasswordToken myToken = new MyUsernamePasswordToken(user.getUsername(), user.getPassword(),
+				LoginTypeEnmu.TOKEN);
 		try {
 			subject.login(myToken);
 		} catch (Exception e) {
-			logger.error("token 登录失败",e);
+			logger.error("token 登录失败", e);
 			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			return false;
 		}
@@ -58,16 +60,16 @@ public class MyTokenFilter extends AccessControlFilter {
 	@Override
 	protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-		  return false;
+		return false;
 	}
-	
-	private static Map<String,User> users=new HashMap<>();
+
+	private static Map<String, User> users = new HashMap<>();
 	static {
-		String username="zhangsan";
+		String username = "zhangsan";
 		users.put(username, new User(1, username, "zs123", "dafd"));
-		username="lisi";
+		username = "lisi";
 		users.put(username, new User(2, username, "ls123", "dafd2"));
-		username="wangwu";
+		username = "wangwu";
 		users.put(username, new User(3, username, "ww123", "dafd3"));
 	}
 

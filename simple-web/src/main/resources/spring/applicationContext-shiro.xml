@@ -16,10 +16,14 @@
 		<property name="credentialsMatcher" ref="credentialsMatcher"></property>
 	</bean>
 	<bean id="credentialsMatcher"
+	class="com.jo.dy.ot.shiro.MyCredentials">
+	<property name="hashIterations" value="1" />
+	</bean>
+	<!--  <bean id="credentialsMatcher"
 	class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
 	<property name="hashAlgorithmName" value="md5" />
 	<property name="hashIterations" value="1" />
-</bean>
+</bean>-->
 	
 	<!-- 缓存管理器 -->
 	<bean id="cacheManager"
