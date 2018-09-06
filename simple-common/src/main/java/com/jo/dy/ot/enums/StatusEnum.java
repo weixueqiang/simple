@@ -2,7 +2,7 @@ package com.jo.dy.ot.enums;
 
 public enum StatusEnum {
 
-	DELETE(0,"删除"),NORMAL(1,"正常"),DISABLE(2,"不可用");
+	DELETE(0,"删除"),NORMAL(1,"正常"),DISABLE(2,"不可用"),CANCEL(3,"取消"),APPLY(4,"申请");
 	
 	private int index;
 	private String desc;

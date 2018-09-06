@@ -31,7 +31,7 @@
 	</bean>
 	
 	<bean id="taskService" factory-bean="processEngineFactoryBean" factory-method="getTaskService"></bean>
-	<bean id="runService" factory-bean="processEngineFactoryBean" factory-method="getRunService"></bean>
+	<bean id="runtimeService" factory-bean="processEngineFactoryBean" factory-method="getRuntimeService"></bean>
 	<bean id="repositoryService" factory-bean="processEngineFactoryBean" factory-method="getRepositoryService"></bean>
 	<bean id="historyService" factory-bean="processEngineFactoryBean" factory-method="getHistoryService"></bean>
 	
