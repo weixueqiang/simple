@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
 	@Resource
 	private UserMapper userMapper;
-	@Resource
+	//@Resource
 	private OtherService otherService;
 	
 	@Override

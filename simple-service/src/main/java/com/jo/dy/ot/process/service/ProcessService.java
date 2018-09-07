@@ -14,22 +14,22 @@ import org.springframework.stereotype.Component;
 @Component("processService")
 public class ProcessService {
 
-	@Resource
-	private RepositoryService repositoryService;
-	
-	@Resource
-	private RuntimeService runtimeService;
-	
-	@Resource
-	private TaskService taskService;
-	
-	public void startProcess(String processDefinitionKey,Map<String,Object> variables) {
-		runtimeService.startProcessInstanceByKey(processDefinitionKey, variables);
-	}
-	
-	public List<Task> listTask(String assignee){
-		return taskService.createTaskQuery().taskAssignee(assignee).list();
-		
-	}
-	
+//	@Resource
+//	private RepositoryService repositoryService;
+//	
+//	@Resource
+//	private RuntimeService runtimeService;
+//	
+//	@Resource
+//	private TaskService taskService;
+//	
+//	public void startProcess(String processDefinitionKey,Map<String,Object> variables) {
+//		runtimeService.startProcessInstanceByKey(processDefinitionKey, variables);
+//	}
+//	
+//	public List<Task> listTask(String assignee){
+//		return taskService.createTaskQuery().taskAssignee(assignee).list();
+//		
+//	}
+//	
 }
