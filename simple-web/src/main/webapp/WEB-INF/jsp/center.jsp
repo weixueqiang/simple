@@ -11,8 +11,8 @@
 <body>
 	<h1>center___</h1>
 	<div id="myInfo">
-	
 	</div>
+	<div><a href="${base}/leaveBill">请假</a></div>
 	<div>
 		<div id="showUser">
 			id:<input type="text" /><input type="button" value="ajax显示一个用户" />

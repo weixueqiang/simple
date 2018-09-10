@@ -17,7 +17,7 @@ public class DeployProcessTest {
 	
 	@Test
 	public void deploy() {
-		repositoryService.createDeployment().name("请假")
+		repositoryService.createDeployment().name("请假带驳回")
 							.addClasspathResource("diagrams/LeaveBill.bpmn")
 							.addClasspathResource("diagrams/LeaveBill.png")
 							.deploy();

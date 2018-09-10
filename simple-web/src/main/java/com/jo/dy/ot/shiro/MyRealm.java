@@ -28,14 +28,14 @@ import com.jo.dy.ot.service.UserService;
 
 public class MyRealm extends AuthorizingRealm {
 
-	// @Resource
+	@Resource
 	private UserService userService;
 
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection arg0) {
 		MyPrincipal myPrincipal = (MyPrincipal) super.getAvailablePrincipal(arg0);
 		User user = myPrincipal.getUser();
-		List<Permission> permission = permissions.get(user.getId());
+		List<Permission> permission = permissions.get(1);
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		Set<String> stringPermissions = new HashSet<>();
 		if (!CollectionUtils.isEmpty(permission)) {
@@ -67,11 +67,11 @@ public class MyRealm extends AuthorizingRealm {
 	private static Map<Integer, List<Permission>> permissions = new HashMap<>();
 	static {
 		String username = "zhangsan";
-		users.put(username, new User(1, username, "3f503bde9ea1d0acb3bfc98e4b58c97c149b3fa6", "salt"));
+		users.put(username, new User(9527, username, "3f503bde9ea1d0acb3bfc98e4b58c97c149b3fa6", "salt"));
 		username = "lisi";
-		users.put(username, new User(2, username, "18d9baadcddac71fefb5ce20a5cbfb281fcc71e", "salt"));
+		users.put(username, new User(9528, username, "18d9baadcddac71fefb5ce20a5cbfb281fcc71e", "salt"));
 		username = "wangwu";
-		users.put(username, new User(3, username, "331043e9c170b0a3dc7c98cd169ba28a1b8296c3", "salt"));
+		users.put(username, new User(9529, username, "331043e9c170b0a3dc7c98cd169ba28a1b8296c3", "salt"));
 
 		List<Permission> list = new ArrayList<>();
 		list.add(new Permission(1, "获取用户", "user:get"));

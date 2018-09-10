@@ -423,6 +423,76 @@ public class LeaveBillExample {
             addCriterion("day_time not between", value1, value2, "dayTime");
             return (Criteria) this;
         }
+
+        public Criteria andProDefIdIsNull() {
+            addCriterion("pro_def_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProDefIdIsNotNull() {
+            addCriterion("pro_def_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProDefIdEqualTo(String value) {
+            addCriterion("pro_def_id =", value, "proDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProDefIdNotEqualTo(String value) {
+            addCriterion("pro_def_id <>", value, "proDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProDefIdGreaterThan(String value) {
+            addCriterion("pro_def_id >", value, "proDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProDefIdGreaterThanOrEqualTo(String value) {
+            addCriterion("pro_def_id >=", value, "proDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProDefIdLessThan(String value) {
+            addCriterion("pro_def_id <", value, "proDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProDefIdLessThanOrEqualTo(String value) {
+            addCriterion("pro_def_id <=", value, "proDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProDefIdLike(String value) {
+            addCriterion("pro_def_id like", value, "proDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProDefIdNotLike(String value) {
+            addCriterion("pro_def_id not like", value, "proDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProDefIdIn(List<String> values) {
+            addCriterion("pro_def_id in", values, "proDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProDefIdNotIn(List<String> values) {
+            addCriterion("pro_def_id not in", values, "proDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProDefIdBetween(String value1, String value2) {
+            addCriterion("pro_def_id between", value1, value2, "proDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProDefIdNotBetween(String value1, String value2) {
+            addCriterion("pro_def_id not between", value1, value2, "proDefId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

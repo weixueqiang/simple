@@ -10,17 +10,7 @@
 	<artifactId>simple-service</artifactId>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.activiti</groupId>
-			<artifactId>activiti-engine</artifactId>
-			<version>5.22.0</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.activiti/activiti-spring -->
-		<dependency>
-			<groupId>org.activiti</groupId>
-			<artifactId>activiti-spring</artifactId>
-			<version>5.22.0</version>
-		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
 		<dependency>
 			<groupId>org.slf4j</groupId>

@@ -37,9 +37,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User get(int id) {
-		String string = otherService.say("zhangsan");
-		System.err.println(string);
-		System.err.println();
+//		String string = otherService.say("zhangsan");
+//		System.err.println(string);
+//		System.err.println();
 		return userMapper.selectByPrimaryKey(id);
 	}
 

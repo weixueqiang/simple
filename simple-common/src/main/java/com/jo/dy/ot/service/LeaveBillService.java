@@ -14,5 +14,7 @@ public interface LeaveBillService {
 	List<LeaveBill> list(int i);
 
 	void updateByKey(LeaveBill leaveBill);
+
+	Result getTask(String taskId);
 	
 }

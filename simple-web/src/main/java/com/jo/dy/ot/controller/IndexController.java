@@ -22,7 +22,7 @@ import com.jo.dy.ot.util.Result;
 @Controller
 public class IndexController extends BaseController{
 
-	//@Resource
+	@Resource
 	private UserService userService;
 	
 	@PostConstruct
@@ -40,6 +40,10 @@ public class IndexController extends BaseController{
 		return "index";
 	}
 	
+	@RequestMapping("/leaveBill")
+	public String leave() {
+		return "leaveBill";
+	}
 	/**
 	 * 用户中心,登录页面登录成功后自动加载该页面
 	 * @date 2018年8月17日 下午5:40:23

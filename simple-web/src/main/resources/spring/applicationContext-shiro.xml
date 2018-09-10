@@ -53,6 +53,8 @@
 			<value>
 				/index.do:anon
 				/login:anon
+				/leaveBill:anon
+				/leave/*=anon
 				/logout:logout
 				/js/*.js=anon
 				/token=token

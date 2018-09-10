@@ -22,5 +22,7 @@
     <dubbo:protocol name="dubbo" port="20880" />  
 
     <dubbo:service interface="com.jo.dy.ot.service.UserService" ref="userService" cache="lru" />
+    <dubbo:service interface="com.jo.dy.ot.service.LeaveBillService" ref="leaveBillService" cache="lru" />
+    <dubbo:service interface="com.jo.dy.ot.service.ProcessService" ref="processService" cache="lru" />
     <dubbo:reference interface="com.jo.dy.ot.service.OtherService" id="otherService" url="dubbo://localhost:20881"/>
 </beans>

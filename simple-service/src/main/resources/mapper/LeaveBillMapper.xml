@@ -7,6 +7,7 @@
     <result column="reason" property="reason" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="day_time" property="dayTime" jdbcType="INTEGER" />
+    <result column="pro_def_id" property="proDefId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, user_id, reason, status, day_time
+    id, user_id, reason, status, day_time, pro_def_id
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jo.dy.ot.entity.LeaveBillExample" >
     select
@@ -101,9 +102,11 @@
   </delete>
   <insert id="insert" parameterType="com.jo.dy.ot.entity.LeaveBill" >
     insert into leave_bill (id, user_id, reason, 
-      status, day_time)
+      status, day_time, pro_def_id
+      )
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{reason,jdbcType=VARCHAR}, 
-      #{status,jdbcType=VARCHAR}, #{dayTime,jdbcType=INTEGER})
+      #{status,jdbcType=VARCHAR}, #{dayTime,jdbcType=INTEGER}, #{proDefId,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.jo.dy.ot.entity.LeaveBill" >
     insert into leave_bill
@@ -123,6 +126,9 @@
       <if test="dayTime != null" >
         day_time,
       </if>
+      <if test="proDefId != null" >
+        pro_def_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -139,6 +145,9 @@
       </if>
       <if test="dayTime != null" >
         #{dayTime,jdbcType=INTEGER},
+      </if>
+      <if test="proDefId != null" >
+        #{proDefId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -166,6 +175,9 @@
       <if test="record.dayTime != null" >
         day_time = #{record.dayTime,jdbcType=INTEGER},
       </if>
+      <if test="record.proDefId != null" >
+        pro_def_id = #{record.proDefId,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -177,7 +189,8 @@
       user_id = #{record.userId,jdbcType=INTEGER},
       reason = #{record.reason,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=VARCHAR},
-      day_time = #{record.dayTime,jdbcType=INTEGER}
+      day_time = #{record.dayTime,jdbcType=INTEGER},
+      pro_def_id = #{record.proDefId,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -197,6 +210,9 @@
       <if test="dayTime != null" >
         day_time = #{dayTime,jdbcType=INTEGER},
       </if>
+      <if test="proDefId != null" >
+        pro_def_id = #{proDefId,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -205,7 +221,8 @@
     set user_id = #{userId,jdbcType=INTEGER},
       reason = #{reason,jdbcType=VARCHAR},
       status = #{status,jdbcType=VARCHAR},
-      day_time = #{dayTime,jdbcType=INTEGER}
+      day_time = #{dayTime,jdbcType=INTEGER},
+      pro_def_id = #{proDefId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

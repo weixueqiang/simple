@@ -50,8 +50,11 @@ public class AllTest {
 		for(String pw:passwords) {
 			System.out.println(SHA1.digest(pw+salt));
 		}
-		
-		
+	}
+	
+	@Test
+	public void arrTest() {
+		int[][] arr= {{1,2,3},{2,3}};
 	}
 	
 	
