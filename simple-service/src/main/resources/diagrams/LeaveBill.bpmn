@@ -15,10 +15,10 @@
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${condition=='批准'}]]></conditionExpression>
     </sequenceFlow>
     <sequenceFlow id="flow5" name="驳回" sourceRef="usertask2" targetRef="usertask1">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${condition=='不批准'}]]></conditionExpression>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${condition=='驳回'}]]></conditionExpression>
     </sequenceFlow>
     <sequenceFlow id="flow6" name="驳回" sourceRef="usertask3" targetRef="usertask1">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${condition=='不批准'}]]></conditionExpression>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${condition=='驳回'}]]></conditionExpression>
     </sequenceFlow>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_LeaveBill">

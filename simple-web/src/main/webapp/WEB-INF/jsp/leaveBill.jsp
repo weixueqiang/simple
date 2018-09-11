@@ -79,12 +79,14 @@
 			"success":function(obj){
 				var html='';
 				if(obj.success){
+					html+='<p><input id="task_id" type="hidden" value="'+taskId+'"></p>'
+					html+='<p><input id="leave_id" type="hidden" value="'+obj.data.id+'"></p>'
 					html+='<p>'+obj.data.id+'->'+obj.data.reason+'->'+obj.data.dayTime+'</p>';
 					html+='<p><input id="comment"></p>'
 					html+='<p>';
 					for(var i=0;i<obj.datas.listFlow.length;i++){
 						console.log(12);
-						html+='<input type="button" value='+obj.datas.listFlow[i]+' onclick="complateTask('+obj.data.id+')">'
+						html+='<input type="button" value="'+obj.datas.listFlow[i]+'" onclick="complateTask(\''+obj.datas.listFlow[i] +'\')">'
 					}
 					html+='</p>'
 						for(var i=0;i<obj.datas.listComment.length;i++){
@@ -97,6 +99,27 @@
 			}
 		});
 		
+	}
+	
+	function complateTask(condition){
+		var taskId=$("#task_id").val();
+		var comment=$("#comment").val();
+		var id=$("#leave_id").val();
+		console.log(id+" : "+taskId+" : "+comment+" : "+condition);
+		
+		$.ajax({
+			"url":"${base}/leave/complate",
+			"type":"get",
+			"data":"id="+id+"&taskId="+taskId+"&comment="+comment+"&condition="+condition,
+			"datatype":"json",
+			"success":function(obj){
+				if(obj.success){
+					$("#doTaskShow").html("<p>办理成功</p>");
+				}else{
+					alert("fail!")
+				}
+			}
+		});
 	}
 	
 	function showAllLeave(){

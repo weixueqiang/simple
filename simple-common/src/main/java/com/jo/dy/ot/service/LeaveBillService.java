@@ -16,5 +16,7 @@ public interface LeaveBillService {
 	void updateByKey(LeaveBill leaveBill);
 
 	Result getTask(String taskId);
+
+	Result complate(String taskId, Integer id, String comment, String condition, Integer userId);
 	
 }

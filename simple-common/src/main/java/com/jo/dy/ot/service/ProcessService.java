@@ -15,4 +15,6 @@ public interface ProcessService {
 
 	List<Comment> listComment(String processInstanceId);
 
+	void saveComment(String taskId, String comment, Integer userId, String processInstanceId);
+
 }

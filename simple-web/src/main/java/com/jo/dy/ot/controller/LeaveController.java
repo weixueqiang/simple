@@ -60,6 +60,11 @@ public class LeaveController {
 		return result;
 	}
 
-	
+	@RequestMapping("/complate")
+	public Result complate(String taskId,Integer id,String comment,String condition) {
+		Result result = new Result();
+		result=leaveBillService.complate(taskId,id,comment,condition,MyUtils.getUser().getId());
+		return result;
+	}
 	
 }

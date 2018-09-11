@@ -92,4 +92,23 @@ public class LeaveBillServiceImpl implements LeaveBillService {
 		return result;
 	}
 
+	@Override
+	@Transactional(rollbackFor=Exception.class)
+	public Result complate(String taskId, Integer id, String comment, String condition, Integer userId) {
+		LeaveBill leaveBill = leaveBillMapper.selectByPrimaryKey(id);
+		processService.saveComment(taskId,comment,userId,leaveBill.getProDefId());
+		Map<String, Object> variables=new HashMap<>();
+		variables.put("condition", condition);
+		taskService.complete(taskId, variables);
+		ProcessInstance instance = runtimeService.createProcessInstanceQuery()
+				.processInstanceId(leaveBill.getProDefId()).singleResult();
+		if(instance==null) {
+			leaveBill.setStatus(StatusEnum.ACCPECT.name());
+		}else {
+			leaveBill.setStatus(StatusEnum.APPLY.name());
+		}
+		leaveBillMapper.updateByPrimaryKeySelective(leaveBill);
+		return new Result();
+	}
+
 }

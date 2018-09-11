@@ -13,6 +13,7 @@ import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.history.HistoricActivityInstance;
+import org.activiti.engine.impl.identity.Authentication;
 import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.activiti.engine.impl.pvm.PvmTransition;
 import org.activiti.engine.impl.pvm.process.ActivityImpl;
@@ -123,6 +124,12 @@ public class ProcessServiceImpl implements ProcessService{
 			comments.addAll(taskService.getTaskComments(taskId));
 		}
 		return comments;
+	}
+
+	@Override
+	public void saveComment(String taskId, String comment, Integer userId, String processInstanceId) {
+		Authentication.setAuthenticatedUserId(userId+"");
+		 taskService.addComment(taskId, processInstanceId, comment);
 	}
 
 }
