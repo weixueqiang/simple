@@ -216,7 +216,16 @@ public class LeaveBillServiceTest {
 		} else {
 
 		}
-
 	}
+	
+	@Test
+	public void finishTest() {
+		Map<String, Object> params=new HashMap<>();
+		params.put("flag", true);
+//		runtimeService.startProcessInstanceByKey("simpleOr", params);
+		taskService.complete("90003",params);
+		
+	}
+	
 
 }

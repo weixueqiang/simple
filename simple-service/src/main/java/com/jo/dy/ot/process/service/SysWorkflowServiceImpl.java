@@ -2,48 +2,152 @@ package com.jo.dy.ot.process.service;
 
 import java.util.*;
 
+import javax.annotation.Resource;
+
 import org.activiti.bpmn.BpmnAutoLayout;
 import org.activiti.bpmn.model.*;
 import org.activiti.bpmn.model.Process;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngines;
+import org.activiti.engine.RepositoryService;
 import org.activiti.engine.repository.Deployment;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONAware;
 import com.alibaba.fastjson.JSONObject;
 import com.jo.dy.ot.entity.SysWorkflow;
 import com.jo.dy.ot.entity.SysWorkflowStep;
 import com.jo.dy.ot.service.SysWorkflowService;
-/**
- * 
- * @project cb-console-service
- * @author suruozhong
- * @description (工作流管理)
- * @date 2017年10月19日
- */
+
 import com.jo.dy.ot.util.Result;
 
-@Service
-@Transactional
+@Service("sysWorkflowService")
 public class SysWorkflowServiceImpl implements SysWorkflowService {
 
+	@Resource
+	private RepositoryService repositoryService;
+
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public Result simpleSave(SysWorkflow model, String steps) {
+		List<SysWorkflowStep> sysWorkflowSteps = JSONArray.parseArray(steps, SysWorkflowStep.class);
+		BpmnModel bpmnModel = new BpmnModel();
+		Process process = new Process();
+		bpmnModel.addProcess(process);
+		process.setId(model.getKey());
+		process.setName(model.getName());
+		process.setDocumentation(model.getContent());
+		process.addFlowElement(createStartEvent());
+		for (int i = 0; i < sysWorkflowSteps.size(); i++) {
+			SysWorkflowStep sysWorkflowStep = sysWorkflowSteps.get(i);
+			if (sysWorkflowStep.getType() == 3) {// 普通
+				process.addFlowElement(createAssigneeTask("userTask" + i, "任务节点" + i, sysWorkflowStep.getAssignss()));
+			}else if(sysWorkflowStep.getType() == 2) {//或签
+				List<String> userIds = getUserIds(sysWorkflowStep);
+				process.addFlowElement(createUserTask("userTask" + i, "任务节点" + i,userIds));
+			}else if(sysWorkflowStep.getType() == 1) {//会签
+				process.addFlowElement(createParallelGateway("parallerl_fork"+i, "并行开始"+i));
+				List<String> userIds = getUserIds(sysWorkflowStep);
+				for (int j = 0; j < userIds.size(); j++) {
+					process.addFlowElement(createAssigneeTask("userTask"+i+"_"+j, "任务节点"+i+"_"+j, userIds.get(j)));
+				}
+				process.addFlowElement(createParallelGateway("parallerl_join"+i, "并行结束"+i));
+			}
+		}
+		process.addFlowElement(createEndEvent());
+		for (int i = 0; i < sysWorkflowSteps.size(); i++) {
+			SysWorkflowStep sysWorkflowStep = sysWorkflowSteps.get(i);
+			List<String> userIds = getUserIds(sysWorkflowStep);
+			if(sysWorkflowStep.getType()==1) {//当前是否为并行
+				if(i==0) {
+					process.addFlowElement(createSequenceFlow("startEvent", "parallerl_fork" + i, "", ""));
+				}else {
+					if(sysWorkflowSteps.get(i-1).getType()==1) {
+						process.addFlowElement(createSequenceFlow("parallerl_join" + (i-1), "parallerl_fork"+i, "", ""));
+					}else {
+						process.addFlowElement(createSequenceFlow("userTask" + (i-1), "parallerl_fork"+i, "", ""));
+					
+					}
+				}
+				for (int j = 0; j < userIds.size(); j++) {
+					process.addFlowElement(createSequenceFlow("parallerl_fork" + i, "userTask" + i+"_"+j, "", ""));
+					process.addFlowElement(createSequenceFlow("userTask" + i+"_"+j, "parallerl_join"+i, "", "${flag}"));
+				}
+				
+				if(i==sysWorkflowSteps.size()-1) {
+					process.addFlowElement(createSequenceFlow("parallerl_join" + i, "endEvent", "", ""));
+				}
+			}else {
+				if(i==0) {
+					process.addFlowElement(createSequenceFlow("startEvent", "userTask" + i, "", ""));
+				}else {
+					if(sysWorkflowSteps.get(i-1).getType()==1) {
+						process.addFlowElement(createSequenceFlow("parallerl_join" + (i-1), "userTask"+i, "", ""));
+					}else {
+						process.addFlowElement(createSequenceFlow("userTask" + (i-1), "userTask"+i, "", "${flag}"));
+					
+					}
+				}
+				if(i==sysWorkflowSteps.size()-1) {
+					process.addFlowElement(createSequenceFlow("userTask" + i, "endEvent", "", ""));
+				}
+			}
+		}
+		new BpmnAutoLayout(bpmnModel).execute();
+		repositoryService.createDeployment().addBpmnModel(process.getId() + ".bpmn", bpmnModel).name(process.getName())
+				.deploy();
+
+		return null;
+	}
+
+	
+
+	private List<String> getUserIds(SysWorkflowStep sysWorkflowStep){
+		List<String> list = new ArrayList<String>();
+		String role = sysWorkflowStep.getRolePkno();
+		String usersId = sysWorkflowStep.getUsersId();
+		if(StringUtils.isBlank(role) && StringUtils.isBlank(usersId)) {
+			return list;
+		}
+		if(StringUtils.isNotBlank(usersId)) {
+			String[] split = usersId.split(",");
+			for(String str:split) {
+				list.add(str);
+			}
+			return list;
+		}
+		list.add("9530");
+		list.add("9531");
+		list.add("9532");
+		return list;
+	}
+	
+	
 	// 获取角色下所有用户
 	private List<String> getUserRole(String rolePkno) {
 		// List<String> list = simpleDao.getDelegate().createSQLQuery("select user_pkno
 		// from sys_user_role_mapping where
 		// role_pkno=:rolePkno").setParameter("rolePkno",rolePkno).list();
-		return null;
+		List<String> list = new ArrayList<String>();
+		list.add("9530");
+		list.add("9531");
+		list.add("9532");
+		return list;
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public Result save(SysWorkflow model, String stepArr) {
 
 		model.setCreateTime(new Date());
 		// sysWorkflowDao.getDelegate().save(model);
 		JSONArray arr = JSONObject.parseArray(stepArr);
+		// List<SysWorkflowStep> parseArray = JSONObject.parseArray(stepArr,
+		// SysWorkflowStep.class);
 		List<SysWorkflowStep> stepList = new ArrayList<SysWorkflowStep>();
 		for (int i = 0; i < arr.size(); i++) {
 			SysWorkflowStep step = new SysWorkflowStep();
@@ -68,6 +172,9 @@ public class SysWorkflowServiceImpl implements SysWorkflowService {
 	 *
 	 */
 	protected void addFlowDeployment(SysWorkflow workflow, List<SysWorkflowStep> stepList) {
+		if (CollectionUtils.isEmpty(stepList)) {
+			return;
+		}
 		System.out.println(".........start...");
 		ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
 
@@ -75,9 +182,9 @@ public class SysWorkflowServiceImpl implements SysWorkflowService {
 		BpmnModel model = new BpmnModel();
 		Process process = new Process();
 		model.addProcess(process);
-		process.setId("news");
-		process.setName(workflow.getName());
-		process.setDocumentation(workflow.getContent());
+		process.setId(workflow.getKey());// key
+		process.setName(workflow.getName());// 名称
+		process.setDocumentation(workflow.getContent());// 描述
 		// 添加流程
 		// 开始节点
 		process.addFlowElement(createStartEvent());
@@ -99,10 +206,13 @@ public class SysWorkflowServiceImpl implements SysWorkflowService {
 
 			} else {
 				// 普通流转
-				// 审核节点
-				process.addFlowElement(createGroupTask("task" + i, "组审核节点" + i, step.getRolePkno()));
+				process.addFlowElement(createAssigneeTask("task" + i, "个人审核", "123"));
+				// 组审核节点
+				// process.addFlowElement(createGroupTask("task" + i, "组审核节点" + i,
+				// step.getRolePkno()));
 				// 回退节点
-				process.addFlowElement(createUserTask("repulse" + i, "回退节点" + i, "${startUserId}"));
+				// process.addFlowElement(createUserTask("repulse" + i, "回退节点" + i,
+				// "${startUserId}"));
 			}
 		}
 		// 结束节点
@@ -240,17 +350,17 @@ public class SysWorkflowServiceImpl implements SysWorkflowService {
 		return userTask;
 	}
 
-	//连线
-	protected SequenceFlow createSequenceFlow(String from, String to,String name,String conditionExpression) {
-        SequenceFlow flow = new SequenceFlow();
-        flow.setSourceRef(from);
-        flow.setTargetRef(to);
-        flow.setName(name);
-        if(StringUtils.isNotEmpty(conditionExpression)){
-            flow.setConditionExpression(conditionExpression);
-        }
-        return flow;
-    }
+	// 连线
+	protected SequenceFlow createSequenceFlow(String from, String to, String name, String conditionExpression) {
+		SequenceFlow flow = new SequenceFlow();
+		flow.setSourceRef(from);
+		flow.setTargetRef(to);
+		flow.setName(name);
+		if (StringUtils.isNotEmpty(conditionExpression)) {
+			flow.setConditionExpression(conditionExpression);
+		}
+		return flow;
+	}
 
 	// 排他网关
 	protected ExclusiveGateway createExclusiveGateway(String id, String name) {
@@ -275,11 +385,19 @@ public class SysWorkflowServiceImpl implements SysWorkflowService {
 		return startEvent;
 	}
 
-	//结束节点
+	// 结束节点
 	protected EndEvent createEndEvent() {
-        EndEvent endEvent = new EndEvent();
-        endEvent.setId("endEvent");
-        return endEvent;
-    }
+		EndEvent endEvent = new EndEvent();
+		endEvent.setId("endEvent");
+		return endEvent;
+	}
 
+	private FlowElement createUserTask(String id, String name, List<String> userIds) {
+		UserTask userTask = new UserTask();
+		userTask.setName(name);
+		userTask.setId(id);
+		userTask.setCandidateUsers(userIds);
+		return userTask;
+	}
+	
 }

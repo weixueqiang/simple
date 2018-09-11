@@ -6,5 +6,7 @@ import com.jo.dy.ot.util.Result;
 public interface SysWorkflowService {
 
 	Result save(SysWorkflow model,String stepArr);
+
+	Result simpleSave(SysWorkflow model, String stepArr);
 	
 }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="simple_depoly" name="自定义的简单部署" isExecutable="true">
+    <documentation>没啥好描述的&gt;&gt;&gt;&gt;&gt;</documentation>
+    <startEvent id="startEvent"></startEvent>
+    <userTask id="userTask0" name="普通任务0" activiti:assignee="123"></userTask>
+    <userTask id="userTask1" name="普通任务1" activiti:assignee="1234"></userTask>
+    <endEvent id="endEvent"></endEvent>
+    <sequenceFlow id="sequenceFlow-e27ba073-22a9-40b4-960f-7f22a9f4bad8" sourceRef="startEvent" targetRef="userTask0"></sequenceFlow>
+    <sequenceFlow id="sequenceFlow-0d0fb116-ca57-4fd9-8212-3e63bff524bb" sourceRef="userTask0" targetRef="userTask1"></sequenceFlow>
+    <sequenceFlow id="sequenceFlow-9a8ecdd1-fb80-41ff-b19e-c4145aab39f0" sourceRef="userTask1" targetRef="endEvent"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_simple_depoly">
+    <bpmndi:BPMNPlane bpmnElement="simple_depoly" id="BPMNPlane_simple_depoly">
+      <bpmndi:BPMNShape bpmnElement="endEvent" id="BPMNShape_endEvent">
+        <omgdc:Bounds height="30.0" width="30.0" x="380.0" y="15.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="startEvent" id="BPMNShape_startEvent">
+        <omgdc:Bounds height="30.0" width="30.0" x="0.0" y="15.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="userTask1" id="BPMNShape_userTask1">
+        <omgdc:Bounds height="60.0" width="100.0" x="230.0" y="0.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="userTask0" id="BPMNShape_userTask0">
+        <omgdc:Bounds height="60.0" width="100.0" x="80.0" y="0.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-0d0fb116-ca57-4fd9-8212-3e63bff524bb" id="BPMNEdge_sequenceFlow-0d0fb116-ca57-4fd9-8212-3e63bff524bb">
+        <omgdi:waypoint x="180.0" y="30.0"></omgdi:waypoint>
+        <omgdi:waypoint x="192.0" y="30.0"></omgdi:waypoint>
+        <omgdi:waypoint x="192.0" y="30.000000000000007"></omgdi:waypoint>
+        <omgdi:waypoint x="230.0" y="30.000000000000007"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-e27ba073-22a9-40b4-960f-7f22a9f4bad8" id="BPMNEdge_sequenceFlow-e27ba073-22a9-40b4-960f-7f22a9f4bad8">
+        <omgdi:waypoint x="30.0" y="30.0"></omgdi:waypoint>
+        <omgdi:waypoint x="42.0" y="30.0"></omgdi:waypoint>
+        <omgdi:waypoint x="42.0" y="30.000000000000007"></omgdi:waypoint>
+        <omgdi:waypoint x="80.0" y="30.000000000000007"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-9a8ecdd1-fb80-41ff-b19e-c4145aab39f0" id="BPMNEdge_sequenceFlow-9a8ecdd1-fb80-41ff-b19e-c4145aab39f0">
+        <omgdi:waypoint x="330.0" y="30.0"></omgdi:waypoint>
+        <omgdi:waypoint x="342.0" y="30.0"></omgdi:waypoint>
+        <omgdi:waypoint x="342.0" y="30.000000000000004"></omgdi:waypoint>
+        <omgdi:waypoint x="380.0" y="30.000000000000004"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

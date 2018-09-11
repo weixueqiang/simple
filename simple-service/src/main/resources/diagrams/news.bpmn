@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="news" name="自定义的" isExecutable="true">
+    <documentation>没啥好描述的</documentation>
+    <startEvent id="startEvent"></startEvent>
+    <parallelGateway id="parallelGateway-fork0" name="并行网关-分支0"></parallelGateway>
+    <userTask id="userTask00" name="并行网关分支用户审核节点00" activiti:candidateUsers="9530"></userTask>
+    <userTask id="userTask01" name="并行网关分支用户审核节点01" activiti:candidateUsers="9531"></userTask>
+    <userTask id="userTask02" name="并行网关分支用户审核节点02" activiti:candidateUsers="9532"></userTask>
+    <parallelGateway id="parallelGateway-join0" name="并行网关到-汇聚0"></parallelGateway>
+    <endEvent id="endEvent"></endEvent>
+    <sequenceFlow id="sequenceFlow-cdd941d6-dade-4dd8-8aa5-4392cbcc036b" name="开始节点到并行网关-分支0" sourceRef="startEvent" targetRef="parallelGateway-fork0"></sequenceFlow>
+    <sequenceFlow id="sequenceFlow-260f0323-ceda-465d-8055-d7f1a8743219" name="并行网关-分支到会签用户00" sourceRef="parallelGateway-fork0" targetRef="userTask00"></sequenceFlow>
+    <sequenceFlow id="sequenceFlow-94c9ea35-9c6d-490f-9117-c9ca96aa3f37" name="会签用户到并行网关-汇聚" sourceRef="userTask00" targetRef="parallelGateway-join0"></sequenceFlow>
+    <sequenceFlow id="sequenceFlow-4e714d6c-6759-4bed-ab1c-5fa2aaf98559" name="并行网关-分支到会签用户01" sourceRef="parallelGateway-fork0" targetRef="userTask01"></sequenceFlow>
+    <sequenceFlow id="sequenceFlow-46cd1e81-5ecf-48c6-b9b5-cdcd9c75dc43" name="会签用户到并行网关-汇聚" sourceRef="userTask01" targetRef="parallelGateway-join0"></sequenceFlow>
+    <sequenceFlow id="sequenceFlow-d2206af7-8b8c-4525-8a9c-89fa01b1d161" name="并行网关-分支到会签用户02" sourceRef="parallelGateway-fork0" targetRef="userTask02"></sequenceFlow>
+    <sequenceFlow id="sequenceFlow-f94a718f-c9a4-4a36-b48c-e1823a1d205e" name="会签用户到并行网关-汇聚" sourceRef="userTask02" targetRef="parallelGateway-join0"></sequenceFlow>
+    <sequenceFlow id="sequenceFlow-9ca99dee-1971-4195-99e8-21af0d48b589" name="并行网关-汇聚到结束节点" sourceRef="parallelGateway-join0" targetRef="endEvent"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_news">
+    <bpmndi:BPMNPlane bpmnElement="news" id="BPMNPlane_news">
+      <bpmndi:BPMNShape bpmnElement="startEvent" id="BPMNShape_startEvent">
+        <omgdc:Bounds height="35.0" width="35.0" x="0.0" y="175.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="parallelGateway-fork0" id="BPMNShape_parallelGateway-fork0">
+        <omgdc:Bounds height="40.0" width="40.0" x="80.0" y="170.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="userTask00" id="BPMNShape_userTask00">
+        <omgdc:Bounds height="60.0" width="100.0" x="170.0" y="320.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="userTask01" id="BPMNShape_userTask01">
+        <omgdc:Bounds height="60.0" width="100.0" x="170.0" y="0.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="userTask02" id="BPMNShape_userTask02">
+        <omgdc:Bounds height="60.0" width="100.0" x="170.0" y="160.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="parallelGateway-join0" id="BPMNShape_parallelGateway-join0">
+        <omgdc:Bounds height="40.0" width="40.0" x="320.0" y="170.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endEvent" id="BPMNShape_endEvent">
+        <omgdc:Bounds height="35.0" width="35.0" x="410.0" y="175.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-cdd941d6-dade-4dd8-8aa5-4392cbcc036b" id="BPMNEdge_sequenceFlow-cdd941d6-dade-4dd8-8aa5-4392cbcc036b">
+        <omgdi:waypoint x="35.0" y="192.0"></omgdi:waypoint>
+        <omgdi:waypoint x="80.0" y="190.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="42.0" width="100.0" x="45.0" y="192.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-260f0323-ceda-465d-8055-d7f1a8743219" id="BPMNEdge_sequenceFlow-260f0323-ceda-465d-8055-d7f1a8743219">
+        <omgdi:waypoint x="120.0" y="190.0"></omgdi:waypoint>
+        <omgdi:waypoint x="132.0" y="200.0"></omgdi:waypoint>
+        <omgdi:waypoint x="132.0" y="350.0"></omgdi:waypoint>
+        <omgdi:waypoint x="170.0" y="350.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="42.0" width="100.0" x="130.0" y="190.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-94c9ea35-9c6d-490f-9117-c9ca96aa3f37" id="BPMNEdge_sequenceFlow-94c9ea35-9c6d-490f-9117-c9ca96aa3f37">
+        <omgdi:waypoint x="270.0" y="350.0"></omgdi:waypoint>
+        <omgdi:waypoint x="282.0" y="350.0"></omgdi:waypoint>
+        <omgdi:waypoint x="282.0" y="190.0"></omgdi:waypoint>
+        <omgdi:waypoint x="320.0" y="190.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="42.0" width="100.0" x="280.0" y="350.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-4e714d6c-6759-4bed-ab1c-5fa2aaf98559" id="BPMNEdge_sequenceFlow-4e714d6c-6759-4bed-ab1c-5fa2aaf98559">
+        <omgdi:waypoint x="120.0" y="190.0"></omgdi:waypoint>
+        <omgdi:waypoint x="132.0" y="180.0"></omgdi:waypoint>
+        <omgdi:waypoint x="132.0" y="30.0"></omgdi:waypoint>
+        <omgdi:waypoint x="170.0" y="30.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="42.0" width="100.0" x="130.0" y="190.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-46cd1e81-5ecf-48c6-b9b5-cdcd9c75dc43" id="BPMNEdge_sequenceFlow-46cd1e81-5ecf-48c6-b9b5-cdcd9c75dc43">
+        <omgdi:waypoint x="270.0" y="30.0"></omgdi:waypoint>
+        <omgdi:waypoint x="282.0" y="30.0"></omgdi:waypoint>
+        <omgdi:waypoint x="282.0" y="190.0"></omgdi:waypoint>
+        <omgdi:waypoint x="320.0" y="190.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="42.0" width="100.0" x="280.0" y="30.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-d2206af7-8b8c-4525-8a9c-89fa01b1d161" id="BPMNEdge_sequenceFlow-d2206af7-8b8c-4525-8a9c-89fa01b1d161">
+        <omgdi:waypoint x="120.0" y="190.0"></omgdi:waypoint>
+        <omgdi:waypoint x="170.0" y="190.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="42.0" width="100.0" x="130.0" y="190.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-f94a718f-c9a4-4a36-b48c-e1823a1d205e" id="BPMNEdge_sequenceFlow-f94a718f-c9a4-4a36-b48c-e1823a1d205e">
+        <omgdi:waypoint x="270.0" y="190.0"></omgdi:waypoint>
+        <omgdi:waypoint x="320.0" y="190.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="42.0" width="100.0" x="280.0" y="190.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow-9ca99dee-1971-4195-99e8-21af0d48b589" id="BPMNEdge_sequenceFlow-9ca99dee-1971-4195-99e8-21af0d48b589">
+        <omgdi:waypoint x="360.0" y="190.0"></omgdi:waypoint>
+        <omgdi:waypoint x="410.0" y="192.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="42.0" width="100.0" x="370.0" y="190.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
