@@ -25,36 +25,35 @@ public class WorkFlowServiceTest {
 	private SysWorkflowService sysWorkflowService;
 	@Resource
 	private RepositoryService repositoryService;
-	
+
 	@Test
 	public void parallerySave() {
-		String stepArr="[{\"id\":123,\"rolePkno\":\"123\",\"type\":1}]";
-		SysWorkflow model=new SysWorkflow();
+		String stepArr = "[{\"id\":123,\"rolePkno\":\"123\",\"type\":1}]";
+		SysWorkflow model = new SysWorkflow();
 		model.setContent("没啥好描述的");
 		model.setName("自定义的");
 		sysWorkflowService.save(model, stepArr);
 	}
-	
+
 	@Test
 	public void loadResource() throws IOException {
-		String deployId="107501";
+		String deployId = "112501";
 		String resourceName = "parallel_.bpmn";
 		String resourceName2 = "parallel_.parallel_.png";
 		InputStream bpmnIn = repositoryService.getResourceAsStream(deployId, resourceName);
 		InputStream pngIn = repositoryService.getResourceAsStream(deployId, resourceName2);
-		FileUtils.copyInputStreamToFile(bpmnIn, new File("C:/img/"+resourceName));
-		FileUtils.copyInputStreamToFile(pngIn, new File("C:/img/"+resourceName2));
+		FileUtils.copyInputStreamToFile(bpmnIn, new File("C:/img/" + resourceName));
+		FileUtils.copyInputStreamToFile(pngIn, new File("C:/img/" + resourceName2));
 	}
 
 	@Test
 	public void simpleSave() {
-		String stepArr="[{\"id\":123,\"assignss\":\"123\",\"type\":3},{\"id\":1234,\"usersId\":\"a1,a2,a3\",\"type\":1}]";
-		SysWorkflow model=new SysWorkflow();
+		String stepArr = "[{\"id\":1234,\"usersId\":\"a1,a2,a3\",\"type\":1},{\"id\":12345,\"usersId\":\"b1,b2,b3\",\"type\":1}]";
+		SysWorkflow model = new SysWorkflow();
 		model.setContent("没啥好描述的>>>>>))");
 		model.setName("自定义的并行>>");
-		model.setKey("parallel_");
+		model.setProcessKey("parallel_");
 		sysWorkflowService.simpleSave(model, stepArr);
 	}
-	
-	
+
 }

@@ -15,8 +15,8 @@ public class SysWorkflow implements Serializable {
     private String name;
     //工作流描述
     private String content;
-    private String key;
-    private Integer skipLevel;
+    private String processKey;
+  
 
     public Long getId() {
         return id;
@@ -50,21 +50,14 @@ public class SysWorkflow implements Serializable {
         this.content = content;
     }
 
-    public Integer getSkipLevel() {
-        return skipLevel;
-    }
-
-    public void setSkipLevel(Integer skipLevel) {
-        this.skipLevel = skipLevel;
-    }
-
-	public String getKey() {
-		return key;
+	public String getProcessKey() {
+		return processKey;
 	}
 
-	public void setKey(String key) {
-		this.key = key;
+	public void setProcessKey(String processKey) {
+		this.processKey = processKey;
 	}
+
     
     
 }

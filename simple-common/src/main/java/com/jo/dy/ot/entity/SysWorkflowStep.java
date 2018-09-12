@@ -10,7 +10,7 @@ public class SysWorkflowStep implements Serializable {
     private Date createTime;
     private Long workflowId;
     //该步骤审核的角色
-    private String rolePkno;
+    private String roleId;
     //指定的组人员ids,以逗号分割
     private String usersId;
     //普通流转办理人
@@ -68,13 +68,7 @@ public class SysWorkflowStep implements Serializable {
         this.workflowId = workflowId;
     }
 
-    public String getRolePkno() {
-        return rolePkno;
-    }
 
-    public void setRolePkno(String rolePkno) {
-        this.rolePkno = rolePkno;
-    }
 
     public Integer getType() {
         return type;
@@ -83,6 +77,14 @@ public class SysWorkflowStep implements Serializable {
     public void setType(Integer type) {
         this.type = type;
     }
+
+	public String getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
+	}
     
     
 }
