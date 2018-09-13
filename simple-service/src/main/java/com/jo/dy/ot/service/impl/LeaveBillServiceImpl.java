@@ -165,4 +165,13 @@ public class LeaveBillServiceImpl implements LeaveBillService {
 		return leaveBillMapper.selectByPrimaryKey(id);
 	}
 
+	@Override
+	public void dealBusiness(Integer id, Boolean flag) {
+		LeaveBill record=new LeaveBill();
+		record.setId(id);
+		record.setStatus(flag ? StatusEnum.ACCPECT.name():StatusEnum.FAIL.name());
+		leaveBillMapper.updateByPrimaryKeySelective(record);
+		
+	}
+
 }

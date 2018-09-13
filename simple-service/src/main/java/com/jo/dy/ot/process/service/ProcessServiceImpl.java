@@ -28,8 +28,10 @@ import org.springframework.util.CollectionUtils;
 import com.jo.dy.ot.dao.SysFlowFormMapper;
 import com.jo.dy.ot.dao.SysWorkflowMapper;
 import com.jo.dy.ot.entity.SysWorkflowExample;
+import com.jo.dy.ot.service.BasicProcess;
 import com.jo.dy.ot.service.ProcessService;
 import com.jo.dy.ot.util.Result;
+import com.jo.dy.ot.util.SpringUtils;
 
 import simple.activiti.test.WorkFlowServiceTest;
 
@@ -159,6 +161,11 @@ public class ProcessServiceImpl implements ProcessService{
 		if(flag) {
 			
 		}else {
+			Integer id=runtimeService.getVariable(task.getExecutionId(), "businessId", Integer.class);
+			String serviceName=runtimeService.getVariable(task.getExecutionId(), "serviceName", String.class);
+			BasicProcess bean = SpringUtils.getBean(serviceName);
+			bean.dealBusiness(id,flag);
+			runtimeService.deleteProcessInstance(task.getProcessInstanceId(), "任务不通过");
 //			sysFlowFormMapper.getByProInsId(task.getProcessInstanceId());
 //			SysWorkflowExample example=new SysWorkflowExample();
 //			example.createCriteria().andProDefIdEqualTo(task.getProcessInstanceId());

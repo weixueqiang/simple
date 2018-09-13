@@ -114,4 +114,12 @@ public class WorkFlowServiceTest {
 		taskService.complete("120014", map);
 		
 	}
+	@Test
+	public void deleteInstance() {
+		runtimeService.deleteProcessInstance("135008", "nothing ");
+		
+	}
+	
+	
+	
 }
