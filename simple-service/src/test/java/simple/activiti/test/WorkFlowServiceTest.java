@@ -45,29 +45,25 @@ public class WorkFlowServiceTest {
 	private TaskService taskService;
 	@Resource
 	private SysWorkflowMapper sysWorkflowMapper;
-	
-	
-	
-	
+
 	@Test
 	@Transactional
 	public void batchSave() {
 		String processKey = sysWorkflowMapper.getProcessKey("testService");
-		System.out.println(processKey+"lllllll------->>>>>>>");
-//		List<SysWorkflowStep> sysWorkflowSteps=new ArrayList<>();
-//		for (int i = 1; i < 3; i++) {
-//			SysWorkflowStep step=new SysWorkflowStep();
-//			step.setCreateTime(new Date());
-//			step.setRoleId(""+i);
-//			step.setType(1);
-//			step.setUsersId("usersId"+i);
-//			step.setWorkflowId(12L);
-//			step.setId(Long.valueOf(i+""));
-//			sysWorkflowSteps.add(step);
-//		}
+		System.out.println(processKey + "lllllll------->>>>>>>");
+		// List<SysWorkflowStep> sysWorkflowSteps=new ArrayList<>();
+		// for (int i = 1; i < 3; i++) {
+		// SysWorkflowStep step=new SysWorkflowStep();
+		// step.setCreateTime(new Date());
+		// step.setRoleId(""+i);
+		// step.setType(1);
+		// step.setUsersId("usersId"+i);
+		// step.setWorkflowId(12L);
+		// step.setId(Long.valueOf(i+""));
+		// sysWorkflowSteps.add(step);
+		// }
 	}
-	
-	
+
 	@Test
 	public void parallerySave() {
 		String stepArr = "[{\"id\":123,\"rolePkno\":\"123\",\"type\":1}]";
@@ -79,10 +75,10 @@ public class WorkFlowServiceTest {
 
 	@Test
 	public void loadResource() throws IOException {
-		String deployId = "117501";
-		String key=""+".";
-		String resourceName = key+"bpmn";
-		String resourceName2 =key+key+"png";
+		String deployId = "132501";
+		String key = "_e5c704d0-46e1-489b-a7cb-53f47fa7e4ef" + ".";
+		String resourceName = key + "bpmn";
+		String resourceName2 = key + key + "png";
 		InputStream bpmnIn = repositoryService.getResourceAsStream(deployId, resourceName);
 		InputStream pngIn = repositoryService.getResourceAsStream(deployId, resourceName2);
 		FileUtils.copyInputStreamToFile(bpmnIn, new File("C:/img/" + resourceName));
@@ -91,27 +87,31 @@ public class WorkFlowServiceTest {
 
 	@Test
 	public void simpleSave() {
-		String stepArr = "[{\"id\":12345,\"usersId\":\"cc\",\"type\":3,\"seq\":0}]";
+		String stepArr = "[{\"usersId\":\"${userId}\",\"type\":2,\"seq\":0},{\"usersId\":\"9528\",\"type\":2,\"seq\":1},"
+				+ "{\"usersId\":\"9529\",\"type\":2,\"seq\":2}]";
 		SysWorkflow model = new SysWorkflow();
 		model.setContent("没啥好描述的>>>>>))");
 		model.setName("自定义的并行>>");
-		String key = UUID.randomUUID().toString();
+		String key = "_"+UUID.randomUUID().toString();
 		model.setProcessKey(key);
-		System.out.println(key+"------>>>>>>\n");
+		System.out.println(key + "------>>>>>>\n");
 		sysWorkflowService.simpleSave(model, stepArr);
 	}
 
-	String processDefinitionKey="parallel_";
-	String taskId="120008";
+	String processDefinitionKey = "parallel_";
+	String taskId = "120011";
+
 	@Test
 	public void simpleStart() {
 		runtimeService.startProcessInstanceByKey(processDefinitionKey);
 	}
-	
+
 	@Test
 	public void complate() {
-		Map<String, Object> map=new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		map.put("flag", false);
-		taskService.complete(taskId,map);
+		taskService.complete(taskId, map);
+		taskService.complete("120014", map);
+		
 	}
 }

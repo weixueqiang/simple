@@ -49,8 +49,10 @@ public class LeaveController {
 	@RequestMapping("listTask")
 	public Result listTask() {
 		Result result = new Result();
-		result.setData(processService.listByAssignee(MyUtils.getUser().getId()+"",
-				leaveBillService.getProcessDefinitionId(null)));
+//		result.setData(processService.listByAssignee(MyUtils.getUser().getId()+"",
+//				leaveBillService.getProcessKey(null)));
+		result.setData(processService.listByUsers(MyUtils.getUser().getId()+"",
+				leaveBillService.getProcessKey(null)));
 		return result;
 	}
 

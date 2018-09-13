@@ -84,10 +84,11 @@
 					html+='<p>'+obj.data.id+'->'+obj.data.reason+'->'+obj.data.dayTime+'</p>';
 					html+='<p><input id="comment"></p>'
 					html+='<p>';
-					for(var i=0;i<obj.datas.listFlow.length;i++){
-						console.log(12);
-						html+='<input type="button" value="'+obj.datas.listFlow[i]+'" onclick="complateTask(\''+obj.datas.listFlow[i] +'\')">'
-					}
+				
+						
+					html+='<input type="button" value="同意" onclick="complateTask(true)">'
+					html+='<input type="button" value="不同意" onclick="complateTask(false)">'
+					
 					html+='</p>'
 						for(var i=0;i<obj.datas.listComment.length;i++){
 							html+='<p>'+obj.datas.listComment[i].fullMessage+'</p>'

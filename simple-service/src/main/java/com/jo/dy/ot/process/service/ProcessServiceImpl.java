@@ -82,12 +82,12 @@ public class ProcessServiceImpl implements ProcessService{
 	}
 
 	@Override
-	public List<Map<String,Object>> listByAssignee(String id, String processDefinitionId) {
-		if(StringUtils.isAnyBlank(id,processDefinitionId)) {
+	public List<Map<String,Object>> listByAssignee(String id, String processDefinitionKey) {
+		if(StringUtils.isAnyBlank(id,processDefinitionKey)) {
 			return null;
 		}
 		List<Task> list = taskService.createTaskQuery().taskAssignee(id)
-				.processDefinitionId(processDefinitionId)
+				.processDefinitionKey(processDefinitionKey)
 				.list();
 		if(CollectionUtils.isEmpty(list)) {
 			return null;
@@ -166,6 +166,27 @@ public class ProcessServiceImpl implements ProcessService{
 		}
 		
 		return null;
+	}
+
+	@Override
+	public List<Map<String, Object>> listByUsers(String id, String processDefinitionKey) {
+		if(StringUtils.isAnyBlank(id,processDefinitionKey)) {
+			return null;
+		}
+		List<Task> list = taskService.createTaskQuery().taskCandidateUser(id)
+				.processDefinitionKey(processDefinitionKey)
+				.list();
+		if(CollectionUtils.isEmpty(list)) {
+			return null;
+		}
+		List<Map<String,Object>> params=new ArrayList<>();
+		for(Task task:list) {
+			Map<String,Object> param=new HashMap<>();
+			param.put("id",task.getId());
+			param.put("name", task.getName());
+			params.add(param);
+		}
+		return params;
 	}
 
 }

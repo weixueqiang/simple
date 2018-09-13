@@ -11,7 +11,7 @@ import com.jo.dy.ot.util.Result;
 
 public interface ProcessService {
 
-	List<Map<String, Object>> listByAssignee(String id,String processDefinitionId);
+	List<Map<String, Object>> listByAssignee(String id,String processDefinitionKey);
 
 	List<String> listFlow(String processInstanceId, String processDefinitionId);
 
@@ -20,5 +20,7 @@ public interface ProcessService {
 	void saveComment(String taskId, String comment, Integer userId, String processInstanceId);
 
 	Result complateTask(String taskId,String processDefintionId, String comment, Integer id, Boolean flag);
+
+	List<Map<String, Object>> listByUsers(String string, String processKey);
 
 }
