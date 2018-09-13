@@ -49,7 +49,6 @@ public class WorkFlowServiceTest {
 		List<SysWorkflowStep> sysWorkflowSteps=new ArrayList<>();
 		for (int i = 1; i < 3; i++) {
 			SysWorkflowStep step=new SysWorkflowStep();
-			step.setAssignss("ann_"+i);
 			step.setCreateTime(new Date());
 			step.setRoleId(""+i);
 			step.setType(1);
@@ -58,11 +57,6 @@ public class WorkFlowServiceTest {
 			step.setId(Long.valueOf(i+""));
 			sysWorkflowSteps.add(step);
 		}
-//		sysWorkflowStepMapper.batchCreate(sysWorkflowSteps);
-		long start=System.currentTimeMillis();
-		sysWorkflowStepMapper.batchUpdate(sysWorkflowSteps);
-		long end=System.currentTimeMillis();
-		System.out.println("耗时:"+(start-end));
 	}
 	
 	

@@ -11,7 +11,6 @@ public class SysFlowForm {
 
     private String name;
 
-
     public Integer getId() {
         return id;
     }
@@ -50,13 +49,5 @@ public class SysFlowForm {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
-    }
-
-    public String getProDefId() {
-        return proDefId;
-    }
-
-    public void setProDefId(String proDefId) {
-        this.proDefId = proDefId == null ? null : proDefId.trim();
     }
 }

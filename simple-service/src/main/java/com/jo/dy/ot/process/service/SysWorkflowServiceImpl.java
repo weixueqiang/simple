@@ -112,9 +112,7 @@ public class SysWorkflowServiceImpl implements SysWorkflowService {
 		for (int i = 0; i < sysWorkflowSteps.size(); i++) {
 			SysWorkflowStep sysWorkflowStep = sysWorkflowSteps.get(i);
 			List<String> userIds = getUserIds(sysWorkflowStep);
-			if (sysWorkflowStep.getType() == 3) {// 普通
-				process.addFlowElement(createAssigneeTask("userTask" + i, "任务节点" + i, sysWorkflowStep.getAssignss()));
-			} else if (sysWorkflowStep.getType() == 2) {// 或签
+			 if (sysWorkflowStep.getType() == 2) {// 或签
 				process.addFlowElement(createUserTask("userTask" + i, "任务节点" + i, userIds));
 			} else if (sysWorkflowStep.getType() == 1) {// 会签
 				process.addFlowElement(createParallelGateway("parallerl_fork" + i, "并行开始" + i));
@@ -133,9 +131,9 @@ public class SysWorkflowServiceImpl implements SysWorkflowService {
 		for (SysWorkflowStep step : sysWorkflowSteps) {
 			step.setWorkflowId(Long.valueOf(id + ""));
 			step.setCreateTime(new Date());
-			// sysWorkflowStepMapper.insertSelective(step);
+			 sysWorkflowStepMapper.insertSelective(step);
 		}
-		sysWorkflowStepMapper.batchCreate(sysWorkflowSteps);
+//		sysWorkflowStepMapper.batchCreate(sysWorkflowSteps);
 	}
 
 	private List<String> getUserIds(SysWorkflowStep sysWorkflowStep) {

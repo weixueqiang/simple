@@ -49,14 +49,6 @@ public class SysWorkflowStep {
         this.usersId = usersId == null ? null : usersId.trim();
     }
 
-    public String getAssignss() {
-        return assignss;
-    }
-
-    public void setAssignss(String assignss) {
-        this.assignss = assignss == null ? null : assignss.trim();
-    }
-
     public Integer getType() {
         return type;
     }
