@@ -2,6 +2,7 @@ package log.test;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
 
 import org.junit.Test;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -54,7 +55,7 @@ public class AllTest {
 	
 	@Test
 	public void arrTest() {
-		int[][] arr= {{1,2,3},{2,3}};
+		System.out.println(UUID.randomUUID());
 	}
 	
 	

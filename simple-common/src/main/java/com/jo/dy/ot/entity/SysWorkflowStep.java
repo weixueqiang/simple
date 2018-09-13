@@ -11,8 +11,6 @@ public class SysWorkflowStep {
 
     private String usersId;
 
-    private String assignss;
-
     private Integer type;
 
     private Date createTime;

@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
@@ -77,8 +78,9 @@ public class WorkFlowServiceTest {
 	@Test
 	public void loadResource() throws IOException {
 		String deployId = "117501";
-		String resourceName = "parallel_.bpmn";
-		String resourceName2 = "parallel_.parallel_.png";
+		String key=""+".";
+		String resourceName = key+"bpmn";
+		String resourceName2 =key+key+"png";
 		InputStream bpmnIn = repositoryService.getResourceAsStream(deployId, resourceName);
 		InputStream pngIn = repositoryService.getResourceAsStream(deployId, resourceName2);
 		FileUtils.copyInputStreamToFile(bpmnIn, new File("C:/img/" + resourceName));
@@ -87,11 +89,13 @@ public class WorkFlowServiceTest {
 
 	@Test
 	public void simpleSave() {
-		String stepArr = "[{\"id\":12345,\"usersId\":\"b1,b2,b3\",\"type\":1}]";
+		String stepArr = "[{\"id\":12345,\"usersId\":\"cc\",\"type\":3,\"seq\":0}]";
 		SysWorkflow model = new SysWorkflow();
 		model.setContent("没啥好描述的>>>>>))");
 		model.setName("自定义的并行>>");
-		model.setProcessKey(processDefinitionKey);
+		String key = UUID.randomUUID().toString();
+		model.setProcessKey(key);
+		System.out.println(key+"------>>>>>>\n");
 		sysWorkflowService.simpleSave(model, stepArr);
 	}
 

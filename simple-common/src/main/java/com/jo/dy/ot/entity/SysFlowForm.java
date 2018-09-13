@@ -11,7 +11,6 @@ public class SysFlowForm {
 
     private String name;
 
-    private String proDefId;
 
     public Integer getId() {
         return id;
