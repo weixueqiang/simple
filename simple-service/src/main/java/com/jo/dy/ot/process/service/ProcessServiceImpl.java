@@ -25,7 +25,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import com.jo.dy.ot.dao.SysFlowFormMapper;
+import com.jo.dy.ot.dao.SysWorkflowMapper;
+import com.jo.dy.ot.entity.SysWorkflowExample;
 import com.jo.dy.ot.service.ProcessService;
+import com.jo.dy.ot.util.Result;
+
+import simple.activiti.test.WorkFlowServiceTest;
 
 
 @Component("processService")
@@ -42,6 +48,10 @@ public class ProcessServiceImpl implements ProcessService{
 	
 	@Resource
 	private HistoryService historyService;
+	@Resource
+	private SysWorkflowMapper sysWorkflowMapper;
+	@Resource
+	private SysFlowFormMapper sysFlowFormMapper;
 
 	public ProcessInstance startProcess(String processDefinitionKey, String businessKey,
 			Map<String, Object> variables) {
@@ -72,9 +82,17 @@ public class ProcessServiceImpl implements ProcessService{
 	}
 
 	@Override
-	public List<Map<String,Object>> list(Integer id, String processDefinitionKey) {
+	public List<Map<String,Object>> listByAssignee(String id, String processDefinitionId) {
+		if(StringUtils.isAnyBlank(id,processDefinitionId)) {
+			return null;
+		}
+		List<Task> list = taskService.createTaskQuery().taskAssignee(id)
+				.processDefinitionId(processDefinitionId)
+				.list();
+		if(CollectionUtils.isEmpty(list)) {
+			return null;
+		}
 		List<Map<String,Object>> params=new ArrayList<>();
-		List<Task> list = taskService.createTaskQuery().taskAssignee(id+"").processDefinitionKey(processDefinitionKey).list();
 		for(Task task:list) {
 			Map<String,Object> param=new HashMap<>();
 			param.put("id",task.getId());
@@ -127,9 +145,27 @@ public class ProcessServiceImpl implements ProcessService{
 	}
 
 	@Override
+	@Transactional
 	public void saveComment(String taskId, String comment, Integer userId, String processInstanceId) {
 		Authentication.setAuthenticatedUserId(userId+"");
 		 taskService.addComment(taskId, processInstanceId, comment);
+	}
+
+	@Override
+	public Result complateTask(String taskId,String processDefintionId, String comment, Integer userId, Boolean flag) {
+		Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
+		task.getProcessInstanceId();
+		this.saveComment(taskId, comment, userId, task.getProcessInstanceId());
+		if(flag) {
+			
+		}else {
+//			sysFlowFormMapper.getByProInsId(task.getProcessInstanceId());
+//			SysWorkflowExample example=new SysWorkflowExample();
+//			example.createCriteria().andProDefIdEqualTo(task.getProcessInstanceId());
+//			sysWorkflowMapper.selectByExample(example);
+		}
+		
+		return null;
 	}
 
 }

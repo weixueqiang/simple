@@ -14,10 +14,17 @@ import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
+import com.github.pagehelper.util.StringUtil;
 import com.jo.dy.ot.dao.LeaveBillMapper;
+import com.jo.dy.ot.dao.SysFlowFormMapper;
+import com.jo.dy.ot.dao.SysWorkflowMapper;
 import com.jo.dy.ot.entity.LeaveBill;
 import com.jo.dy.ot.entity.LeaveBillExample;
+import com.jo.dy.ot.entity.SysFlowForm;
+import com.jo.dy.ot.entity.SysFlowFormExample;
+import com.jo.dy.ot.entity.SysWorkflow;
 import com.jo.dy.ot.enums.StatusEnum;
 import com.jo.dy.ot.service.LeaveBillService;
 import com.jo.dy.ot.service.ProcessService;
@@ -27,9 +34,12 @@ public class LeaveBillServiceImpl implements LeaveBillService {
 
 	@Resource
 	private LeaveBillMapper leaveBillMapper;
-	
 	@Resource
 	private ProcessService processService;
+	@Resource
+	private SysFlowFormMapper sysFlowFormMapper;
+	@Resource
+	private SysWorkflowMapper sysWorkflowMapper;
 	
 	@Resource
 	private TaskService taskService;
@@ -42,19 +52,33 @@ public class LeaveBillServiceImpl implements LeaveBillService {
 	private static String processDefinitionKey="LeaveBill";
 	private static String businessKey="leaveBillService";
 	
-	
-	
+	private String getName() {
+		Service annotation = this.getClass().getAnnotation(Service.class);
+		if(annotation!=null) {
+			return annotation.value();
+		}
+		return null;
+	}
 	
 	@Override
 	@Transactional(rollbackFor=Exception.class)
 	public Result save(LeaveBill leaveBill) {//保存即启动流程
-		Map<String, Object> params=new HashMap<>();
-		params.put("userId", leaveBill.getUserId());
-		ProcessInstance pi = runtimeService.startProcessInstanceByKey(processDefinitionKey,params);
-		leaveBill.setProDefId(pi.getProcessInstanceId());
+		Result result = new Result();
+		sysWorkflowMapper.getProcessKey(getName());
+		String processDefinitionId=this.getProcessDefinitionId(null);
+		if(StringUtil.isEmpty(processDefinitionId)) {
+			result.fail("请先配置流程!");
+			return result;
+		}
 		leaveBill.setStatus(StatusEnum.BE_SUBMIT.name());
 		int id = leaveBillMapper.insertSelective(leaveBill);
-		return null;
+		Map<String, Object> params=new HashMap<>();
+		params.put("userId", leaveBill.getUserId());
+		params.put("serviceName", getName());
+		params.put("businessId", id);
+		ProcessInstance pi = runtimeService.startProcessInstanceById(processDefinitionId, params);
+//		leaveBill.setProDefId(pi.getProcessInstanceId());
+		return result;
 	}
 
 	@Override
@@ -112,6 +136,23 @@ public class LeaveBillServiceImpl implements LeaveBillService {
 		}
 		leaveBillMapper.updateByPrimaryKeySelective(leaveBill);
 		return new Result();
+	}
+
+	@Override
+	public String getProcessDefinitionId(String customeId) {
+		SysFlowFormExample example=new SysFlowFormExample();
+		example.createCriteria().andServiceNameEqualTo(getName());
+		List<SysFlowForm> sysFlowForms = sysFlowFormMapper.selectByExample(example);
+		if(CollectionUtils.isEmpty(sysFlowForms)) {
+			return null;
+		}
+		//理论只有一个,自己添加的
+		SysFlowForm sysFlowForm=sysFlowForms.get(0);
+		SysWorkflow sysWorkflow = sysWorkflowMapper.selectByPrimaryKey(sysFlowForm.getWorkflowId());
+		if(sysWorkflow==null) {
+			return null;
+		}
+		return sysWorkflow.getProDefId();
 	}
 
 }

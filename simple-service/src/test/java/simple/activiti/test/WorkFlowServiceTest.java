@@ -22,6 +22,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jo.dy.ot.dao.SysWorkflowMapper;
 import com.jo.dy.ot.dao.SysWorkflowStepMapper;
 import com.jo.dy.ot.entity.SysWorkflow;
 import com.jo.dy.ot.entity.SysWorkflowStep;
@@ -42,21 +43,28 @@ public class WorkFlowServiceTest {
 	private RuntimeService runtimeService;
 	@Resource
 	private TaskService taskService;
-
+	@Resource
+	private SysWorkflowMapper sysWorkflowMapper;
+	
+	
+	
+	
 	@Test
 	@Transactional
 	public void batchSave() {
-		List<SysWorkflowStep> sysWorkflowSteps=new ArrayList<>();
-		for (int i = 1; i < 3; i++) {
-			SysWorkflowStep step=new SysWorkflowStep();
-			step.setCreateTime(new Date());
-			step.setRoleId(""+i);
-			step.setType(1);
-			step.setUsersId("usersId"+i);
-			step.setWorkflowId(12L);
-			step.setId(Long.valueOf(i+""));
-			sysWorkflowSteps.add(step);
-		}
+		String processKey = sysWorkflowMapper.getProcessKey("testService");
+		System.out.println(processKey+"lllllll------->>>>>>>");
+//		List<SysWorkflowStep> sysWorkflowSteps=new ArrayList<>();
+//		for (int i = 1; i < 3; i++) {
+//			SysWorkflowStep step=new SysWorkflowStep();
+//			step.setCreateTime(new Date());
+//			step.setRoleId(""+i);
+//			step.setType(1);
+//			step.setUsersId("usersId"+i);
+//			step.setWorkflowId(12L);
+//			step.setId(Long.valueOf(i+""));
+//			sysWorkflowSteps.add(step);
+//		}
 	}
 	
 	

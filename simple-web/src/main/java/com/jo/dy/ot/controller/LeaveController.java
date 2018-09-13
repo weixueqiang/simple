@@ -49,22 +49,25 @@ public class LeaveController {
 	@RequestMapping("listTask")
 	public Result listTask() {
 		Result result = new Result();
-		result.setData(processService.list(MyUtils.getUser().getId(), "LeaveBill"));
+		result.setData(processService.listByAssignee(MyUtils.getUser().getId()+"",
+				leaveBillService.getProcessDefinitionId(null)));
 		return result;
 	}
 
 	@RequestMapping("getTask")
 	public Result getTask(String taskId) {
 		Result result = new Result();
-		result=leaveBillService.getTask(taskId);
+		result = leaveBillService.getTask(taskId);
 		return result;
 	}
 
 	@RequestMapping("/complate")
-	public Result complate(String taskId,Integer id,String comment,String condition) {
+	public Result complate(String taskId, String processDefintionId, String comment, String condition,Boolean flag) {
 		Result result = new Result();
-		result=leaveBillService.complate(taskId,id,comment,condition,MyUtils.getUser().getId());
+//		result = leaveBillService.complate(taskId, id, comment, condition, MyUtils.getUser().getId());
+		result=processService.complateTask(taskId, processDefintionId, comment,MyUtils.getUser().getId(),flag);
+		
 		return result;
 	}
-	
+
 }

@@ -59,7 +59,6 @@ public class SysWorkflowServiceImpl implements SysWorkflowService {
 		//获取流程定义对象
 		ProcessDefinition proDef = repositoryService.createProcessDefinitionQuery().deploymentId(deploy.getId())
 				.singleResult();
-		model.setProDefId(proDef.getId());
 		saveWorkflow(model, sysWorkflowSteps);//保存自定义的数据
 		return null;
 	}

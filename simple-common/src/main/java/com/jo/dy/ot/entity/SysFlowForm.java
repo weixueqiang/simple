@@ -7,7 +7,7 @@ public class SysFlowForm {
 
     private String customeId;
 
-    private Integer workflowId;
+    private Long workflowId;
 
     private String name;
 
@@ -35,11 +35,11 @@ public class SysFlowForm {
         this.customeId = customeId == null ? null : customeId.trim();
     }
 
-    public Integer getWorkflowId() {
+    public Long getWorkflowId() {
         return workflowId;
     }
 
-    public void setWorkflowId(Integer workflowId) {
+    public void setWorkflowId(Long workflowId) {
         this.workflowId = workflowId;
     }
 

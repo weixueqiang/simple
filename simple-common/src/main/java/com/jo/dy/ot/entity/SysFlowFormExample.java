@@ -314,52 +314,52 @@ public class SysFlowFormExample {
             return (Criteria) this;
         }
 
-        public Criteria andWorkflowIdEqualTo(Integer value) {
+        public Criteria andWorkflowIdEqualTo(Long value) {
             addCriterion("workflow_id =", value, "workflowId");
             return (Criteria) this;
         }
 
-        public Criteria andWorkflowIdNotEqualTo(Integer value) {
+        public Criteria andWorkflowIdNotEqualTo(Long value) {
             addCriterion("workflow_id <>", value, "workflowId");
             return (Criteria) this;
         }
 
-        public Criteria andWorkflowIdGreaterThan(Integer value) {
+        public Criteria andWorkflowIdGreaterThan(Long value) {
             addCriterion("workflow_id >", value, "workflowId");
             return (Criteria) this;
         }
 
-        public Criteria andWorkflowIdGreaterThanOrEqualTo(Integer value) {
+        public Criteria andWorkflowIdGreaterThanOrEqualTo(Long value) {
             addCriterion("workflow_id >=", value, "workflowId");
             return (Criteria) this;
         }
 
-        public Criteria andWorkflowIdLessThan(Integer value) {
+        public Criteria andWorkflowIdLessThan(Long value) {
             addCriterion("workflow_id <", value, "workflowId");
             return (Criteria) this;
         }
 
-        public Criteria andWorkflowIdLessThanOrEqualTo(Integer value) {
+        public Criteria andWorkflowIdLessThanOrEqualTo(Long value) {
             addCriterion("workflow_id <=", value, "workflowId");
             return (Criteria) this;
         }
 
-        public Criteria andWorkflowIdIn(List<Integer> values) {
+        public Criteria andWorkflowIdIn(List<Long> values) {
             addCriterion("workflow_id in", values, "workflowId");
             return (Criteria) this;
         }
 
-        public Criteria andWorkflowIdNotIn(List<Integer> values) {
+        public Criteria andWorkflowIdNotIn(List<Long> values) {
             addCriterion("workflow_id not in", values, "workflowId");
             return (Criteria) this;
         }
 
-        public Criteria andWorkflowIdBetween(Integer value1, Integer value2) {
+        public Criteria andWorkflowIdBetween(Long value1, Long value2) {
             addCriterion("workflow_id between", value1, value2, "workflowId");
             return (Criteria) this;
         }
 
-        public Criteria andWorkflowIdNotBetween(Integer value1, Integer value2) {
+        public Criteria andWorkflowIdNotBetween(Long value1, Long value2) {
             addCriterion("workflow_id not between", value1, value2, "workflowId");
             return (Criteria) this;
         }

@@ -27,4 +27,6 @@ public interface SysWorkflowMapper {
     int updateByPrimaryKeySelective(SysWorkflow record);
 
     int updateByPrimaryKey(SysWorkflow record);
+
+	String getProcessKey(String name);
 }
