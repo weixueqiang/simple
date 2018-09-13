@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jo.dy.ot.dao.SysWorkflowStepMapper" >
+  <resultMap id="BaseResultMap" type="com.jo.dy.ot.entity.SysWorkflowStep" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="workflow_id" property="workflowId" jdbcType="BIGINT" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="users_id" property="usersId" jdbcType="VARCHAR" />
+    <result column="assignss" property="assignss" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, workflow_id, role_id, users_id, assignss, type, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jo.dy.ot.entity.SysWorkflowStepExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_workflow_step
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_workflow_step
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_workflow_step
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jo.dy.ot.entity.SysWorkflowStepExample" >
+    delete from sys_workflow_step
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jo.dy.ot.entity.SysWorkflowStep" >
+    insert into sys_workflow_step (id, workflow_id, role_id, 
+      users_id, assignss, type, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{workflowId,jdbcType=BIGINT}, #{roleId,jdbcType=VARCHAR}, 
+      #{usersId,jdbcType=VARCHAR}, #{assignss,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jo.dy.ot.entity.SysWorkflowStep" >
+    insert into sys_workflow_step
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="workflowId != null" >
+        workflow_id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="usersId != null" >
+        users_id,
+      </if>
+      <if test="assignss != null" >
+        assignss,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="workflowId != null" >
+        #{workflowId,jdbcType=BIGINT},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="usersId != null" >
+        #{usersId,jdbcType=VARCHAR},
+      </if>
+      <if test="assignss != null" >
+        #{assignss,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jo.dy.ot.entity.SysWorkflowStepExample" resultType="java.lang.Integer" >
+    select count(*) from sys_workflow_step
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_workflow_step
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.workflowId != null" >
+        workflow_id = #{record.workflowId,jdbcType=BIGINT},
+      </if>
+      <if test="record.roleId != null" >
+        role_id = #{record.roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usersId != null" >
+        users_id = #{record.usersId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assignss != null" >
+        assignss = #{record.assignss,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_workflow_step
+    set id = #{record.id,jdbcType=BIGINT},
+      workflow_id = #{record.workflowId,jdbcType=BIGINT},
+      role_id = #{record.roleId,jdbcType=VARCHAR},
+      users_id = #{record.usersId,jdbcType=VARCHAR},
+      assignss = #{record.assignss,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jo.dy.ot.entity.SysWorkflowStep" >
+    update sys_workflow_step
+    <set >
+      <if test="workflowId != null" >
+        workflow_id = #{workflowId,jdbcType=BIGINT},
+      </if>
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="usersId != null" >
+        users_id = #{usersId,jdbcType=VARCHAR},
+      </if>
+      <if test="assignss != null" >
+        assignss = #{assignss,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jo.dy.ot.entity.SysWorkflowStep" >
+    update sys_workflow_step
+    set workflow_id = #{workflowId,jdbcType=BIGINT},
+      role_id = #{roleId,jdbcType=VARCHAR},
+      users_id = #{usersId,jdbcType=VARCHAR},
+      assignss = #{assignss,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <insert id="batchCreate" parameterType="java.util.List">
+  	 insert into sys_workflow_step (workflow_id, role_id, 
+      users_id, assignss, type, 
+      create_time)
+    values 
+    <foreach collection="list" item="data" separator=",">
+	    ( #{data.workflowId,jdbcType=BIGINT}, #{data.roleId,jdbcType=VARCHAR}, 
+	      #{data.usersId,jdbcType=VARCHAR}, #{data.assignss,jdbcType=VARCHAR}, #{data.type,jdbcType=INTEGER}, 
+	      #{data.createTime,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+  
+  <update id="batchUpdate" parameterType="java.util.List" >
+  	<foreach collection="list" item="data" separator=";" >
+  		 update sys_workflow_step set
+     
+        role_id = #{data.roleId,jdbcType=VARCHAR},
+      
+        workflow_id = #{data.workflowId,jdbcType=BIGINT},
+      
+        users_id = #{data.usersId,jdbcType=VARCHAR},
+    
+        assignss = #{data.assignss,jdbcType=VARCHAR},
+      
+      
+        type = #{data.type,jdbcType=INTEGER},
+    
+      
+        create_time = #{data.createTime,jdbcType=TIMESTAMP} 
+      
+   
+    where id = #{data.id,jdbcType=BIGINT}
+  	</foreach>
+  </update>
+  
+</mapper>

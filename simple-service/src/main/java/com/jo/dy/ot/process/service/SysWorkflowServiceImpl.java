@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSONArray;
+import com.jo.dy.ot.dao.SysWorkflowMapper;
+import com.jo.dy.ot.dao.SysWorkflowStepMapper;
 import com.jo.dy.ot.entity.SysWorkflow;
 import com.jo.dy.ot.entity.SysWorkflowStep;
 import com.jo.dy.ot.service.SysWorkflowService;
@@ -26,12 +28,17 @@ public class SysWorkflowServiceImpl implements SysWorkflowService {
 
 	@Resource
 	private RepositoryService repositoryService;
+	@Resource
+	private SysWorkflowMapper sysWorkflowMapper;
+	@Resource
+	private SysWorkflowStepMapper sysWorkflowStepMapper;
 
 	
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Result simpleSave(SysWorkflow model, String steps) {
 		List<SysWorkflowStep> sysWorkflowSteps = JSONArray.parseArray(steps, SysWorkflowStep.class);
+		saveWorkflow(model,sysWorkflowSteps);
 		BpmnModel bpmnModel = new BpmnModel();
 		Process process = new Process();
 		bpmnModel.addProcess(process);
@@ -102,6 +109,18 @@ public class SysWorkflowServiceImpl implements SysWorkflowService {
 	}
 
 	
+
+	private void saveWorkflow(SysWorkflow model, List<SysWorkflowStep> sysWorkflowSteps) {
+		int id = sysWorkflowMapper.insertSelective(model);
+		for(SysWorkflowStep step:sysWorkflowSteps) {
+			step.setWorkflowId(Long.valueOf(id+""));
+			step.setCreateTime(new Date());
+//			sysWorkflowStepMapper.insertSelective(step);
+		}
+		sysWorkflowStepMapper.batchCreate(sysWorkflowSteps);
+	}
+
+
 
 	private List<String> getUserIds(SysWorkflowStep sysWorkflowStep){
 		List<String> list = new ArrayList<String>();
