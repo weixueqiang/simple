@@ -1,22 +1,21 @@
 package com.jo.dy.ot.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
-
-
-
-public class SysWorkflow implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
+public class SysWorkflow {
     private Long id;
-    private Date createTime;
-    //工作流名称
+
     private String name;
-    //工作流描述
+
     private String content;
+
     private String processKey;
-  
+
+    private Date createTime;
+
+    private String customerId;
+
+    private String proDefId;
 
     public Long getId() {
         return id;
@@ -24,6 +23,30 @@ public class SysWorkflow implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
+    }
+
+    public String getProcessKey() {
+        return processKey;
+    }
+
+    public void setProcessKey(String processKey) {
+        this.processKey = processKey == null ? null : processKey.trim();
     }
 
     public Date getCreateTime() {
@@ -34,30 +57,19 @@ public class SysWorkflow implements Serializable {
         this.createTime = createTime;
     }
 
-    public String getName() {
-        return name;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId == null ? null : customerId.trim();
     }
 
-    public String getContent() {
-        return content;
+    public String getProDefId() {
+        return proDefId;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setProDefId(String proDefId) {
+        this.proDefId = proDefId == null ? null : proDefId.trim();
     }
-
-	public String getProcessKey() {
-		return processKey;
-	}
-
-	public void setProcessKey(String processKey) {
-		this.processKey = processKey;
-	}
-
-    
-    
 }
