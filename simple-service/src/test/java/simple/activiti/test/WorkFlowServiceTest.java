@@ -22,8 +22,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jo.dy.ot.dao.LeaveBillMapper;
 import com.jo.dy.ot.dao.SysWorkflowMapper;
 import com.jo.dy.ot.dao.SysWorkflowStepMapper;
+import com.jo.dy.ot.entity.LeaveBill;
 import com.jo.dy.ot.entity.SysWorkflow;
 import com.jo.dy.ot.entity.SysWorkflowStep;
 import com.jo.dy.ot.service.SysWorkflowService;
@@ -45,23 +47,20 @@ public class WorkFlowServiceTest {
 	private TaskService taskService;
 	@Resource
 	private SysWorkflowMapper sysWorkflowMapper;
+	@Resource
+	private LeaveBillMapper leaveBillMapper;
 
 	@Test
-	@Transactional
 	public void batchSave() {
-		String processKey = sysWorkflowMapper.getProcessKey("testService");
-		System.out.println(processKey + "lllllll------->>>>>>>");
-		// List<SysWorkflowStep> sysWorkflowSteps=new ArrayList<>();
-		// for (int i = 1; i < 3; i++) {
-		// SysWorkflowStep step=new SysWorkflowStep();
-		// step.setCreateTime(new Date());
-		// step.setRoleId(""+i);
-		// step.setType(1);
-		// step.setUsersId("usersId"+i);
-		// step.setWorkflowId(12L);
-		// step.setId(Long.valueOf(i+""));
-		// sysWorkflowSteps.add(step);
-		// }
+		LeaveBill leaveBill=new LeaveBill();
+		leaveBill.setDayTime(2);
+		leaveBill.setProDefId("122");
+		leaveBill.setReason("nothing");
+		leaveBill.setUserId(12);
+		leaveBill.setStatus("normal");
+		Integer save = leaveBillMapper.save(leaveBill);
+		System.out.println("----->>>>>>>>: "+save);
+		System.out.println("----->>>>>>>>: "+leaveBill.getId());
 	}
 
 	@Test
@@ -116,8 +115,7 @@ public class WorkFlowServiceTest {
 	}
 	@Test
 	public void deleteInstance() {
-		runtimeService.deleteProcessInstance("135008", "nothing ");
-		
+		runtimeService.deleteProcessInstance("137501", "nothing ");
 	}
 	
 	

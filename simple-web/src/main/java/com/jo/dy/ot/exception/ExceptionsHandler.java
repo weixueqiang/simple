@@ -29,6 +29,7 @@ public class ExceptionsHandler {
 	@ResponseBody
 	public Result exceptionHandler(Exception ex) {
 		Result result = new Result();
+		ex.printStackTrace();
 		if(ex instanceof ShiroException) {
 			result.fail("没有权限!");
 		}else if(ex instanceof BindException) {

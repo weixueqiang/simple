@@ -27,4 +27,6 @@ public interface SysWorkflowStepMapper {
     int updateByPrimaryKeySelective(SysWorkflowStep record);
 
     int updateByPrimaryKey(SysWorkflowStep record);
+
+	void batchCreate(List<SysWorkflowStep> sysWorkflowSteps);
 }

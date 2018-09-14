@@ -27,4 +27,6 @@ public interface LeaveBillMapper {
     int updateByPrimaryKeySelective(LeaveBill record);
 
     int updateByPrimaryKey(LeaveBill record);
+
+	Integer save(LeaveBill leaveBill);
 }

@@ -21,6 +21,7 @@
     <dubbo:reference id="userSerivce" interface="com.jo.dy.ot.service.UserService" url="localhost:20880"/>
     <dubbo:reference id="leaveBillService" interface="com.jo.dy.ot.service.LeaveBillService" url="localhost:20880" />
     <dubbo:reference id="processService" interface="com.jo.dy.ot.service.ProcessService" url="localhost:20880" />
+    <dubbo:reference id="sysWorkflowService" interface="com.jo.dy.ot.service.SysWorkflowService" url="localhost:20880" />
       <!-- <dubbo:registry protocol="zookeeper" address="zookeeper://192.168.93.131:2181" />  --> 
     
     <!-- 用上面的 -->

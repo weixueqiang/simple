@@ -145,14 +145,6 @@ public class LeaveBillServiceTest {
 		}
 		
 	}
-	
-	
-	
-	@Test
-	public void submit() {
-		Integer userId = 9527;
-		leaveBillService.submitLeave(2, userId);
-	}
 
 	@Test
 	public void queryTask() {

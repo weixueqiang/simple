@@ -109,6 +109,17 @@
       #{usersId,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{seq,jdbcType=INTEGER})
   </insert>
+  <insert id="batchCreate" parameterType="java.util.List"  >
+    insert into sys_workflow_step ( workflow_id, role_id, 
+      users_id, type, create_time, 
+      seq) values
+     <foreach collection="list" item="data" separator=",">
+   	 ( #{data.workflowId,jdbcType=BIGINT}, #{data.roleId,jdbcType=VARCHAR}, 
+      #{data.usersId,jdbcType=VARCHAR}, #{data.type,jdbcType=INTEGER}, #{data.createTime,jdbcType=TIMESTAMP}, 
+      #{data.seq,jdbcType=INTEGER})
+     
+     </foreach>
+  </insert>
   <insert id="insertSelective" parameterType="com.jo.dy.ot.entity.SysWorkflowStep" >
     insert into sys_workflow_step
     <trim prefix="(" suffix=")" suffixOverrides="," >

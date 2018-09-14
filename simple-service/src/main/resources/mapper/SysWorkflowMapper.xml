@@ -246,6 +246,12 @@
 	join sys_flow_form sff on sff.workflow_id=sw.id
 	WHERE sff.service_name=#{name}
   </select>
-  
-  
+  <insert id="save"  parameterType="com.jo.dy.ot.entity.SysWorkflow" useGeneratedKeys="true" keyProperty="id" >
+    insert into sys_workflow ( name, content, 
+      process_key, create_time, customer_id, 
+      pro_def_id)
+    values (#{name,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{processKey,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{customerId,jdbcType=VARCHAR}, 
+      #{proDefId,jdbcType=VARCHAR})
+  </insert>
 </mapper>

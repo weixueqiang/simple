@@ -8,15 +8,9 @@ import com.jo.dy.ot.util.Result;
 public interface LeaveBillService extends BasicProcess{
 
 	Result save(LeaveBill leaveBill);
-	
-	Result submitLeave(Integer id,Integer userId);
 
-	List<LeaveBill> list(int i);
+	List<LeaveBill> list(Integer userId);
 
 	void updateByKey(LeaveBill leaveBill);
 
-	Result getTask(String taskId);
-
-	Result complate(String taskId, Integer id, String comment, String condition, Integer userId);
-	
 }

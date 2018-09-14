@@ -30,4 +30,6 @@ public interface SysWorkflowMapper {
 
 	String getProcessKey(String name);
 
+	Integer save(SysWorkflow model);
+
 }

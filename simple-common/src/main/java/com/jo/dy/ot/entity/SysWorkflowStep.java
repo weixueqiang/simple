@@ -1,8 +1,9 @@
 package com.jo.dy.ot.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class SysWorkflowStep {
+public class SysWorkflowStep implements Serializable{
     private Long id;
 
     private Long workflowId;

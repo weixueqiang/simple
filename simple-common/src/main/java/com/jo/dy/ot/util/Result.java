@@ -12,9 +12,10 @@ public class Result implements Serializable{
 	private String msg="操作成功";
 	private Map<String,Object> datas;
 	
-	public void fail(String msg) {
+	public Result fail(String msg) {
 		this.success=false;
 		this.msg=msg;
+		return this;
 	}
 	public void fail(int code,String msg) {
 		this.success=false;

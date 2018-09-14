@@ -6,6 +6,6 @@ public interface BasicProcess {
 
 	Object get(Integer id);
 
-	void dealBusiness(Integer id, Boolean flag);
+	void dealBusiness(Integer id, String status);
 	
 }

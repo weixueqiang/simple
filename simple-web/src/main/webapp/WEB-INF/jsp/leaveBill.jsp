@@ -10,6 +10,9 @@
 </head>
 <body>
 	<h1>Leave___</h1>
+	</div>
+	<a href="${base }/logout">退出</a>
+	<div>
 	<div>
 		<form id="leave_form">
 			<p>reason:<input name="reason"></p>
@@ -51,20 +54,24 @@
 			"datatype":"json",
 			"success":function(obj){
 				var html='';
+				console.log(obj)
 				if(obj.success){
-					html+='<table>';
 					var arr=obj.data;
-					console.log(arr);
-					for(var i=0;i<arr.length;i++){
-						html+='<tr><td>'+arr[i].id+'</td><td><td>'+arr[i].name+'</td>'+
-						'<td><input type="button" value="办理" onclick="doTask('+arr[i].id+')"></td>'
-						+'</tr>'
+					if(arr){
+						html+='<table>';
+						console.log(arr);
+						for(var i=0;i<arr.length;i++){
+							html+='<tr><td>'+arr[i].id+'</td><td><td>'+arr[i].name+'</td>'+
+							'<td><input type="button" value="办理" onclick="doTask('+arr[i].id+')"></td>'
+							+'</tr>'
+						}
+						html+='</table>';
+					}else{
+						html+='<h3>你暂无需要处理的请假任务</h3>'
 					}
-					
-				html+='</table>';
-				$("#showLeaveTask").html(html);
+					$("#showLeaveTask").html(html);
 				}else{
-					alert("fail!")
+					$("#showLeaveTask").html("<h>FAIL</h>");
 				}
 			}
 		});
@@ -90,12 +97,12 @@
 					html+='<input type="button" value="不同意" onclick="complateTask(false)">'
 					
 					html+='</p>'
-						for(var i=0;i<obj.datas.listComment.length;i++){
-							html+='<p>'+obj.datas.listComment[i].fullMessage+'</p>'
-						}
+					for(var i=0;i<obj.datas.listComment.length;i++){
+						html+='<p>'+obj.datas.listComment[i].fullMessage+'</p>'
+					}
 					$("#doTaskShow").html(html);
 				}else{
-					alert("fail!")
+					$("#doTaskShow").html("<h>FAIL</h>");
 				}
 			}
 		});
@@ -111,13 +118,13 @@
 		$.ajax({
 			"url":"${base}/leave/complate",
 			"type":"get",
-			"data":"id="+id+"&taskId="+taskId+"&comment="+comment+"&condition="+condition,
+			"data":"id="+id+"&taskId="+taskId+"&comment="+comment+"&flag="+condition,
 			"datatype":"json",
 			"success":function(obj){
 				if(obj.success){
 					$("#doTaskShow").html("<p>办理成功</p>");
 				}else{
-					alert("fail!")
+					$("#doTaskShow").html("<p>操作失败</p>");
 				}
 			}
 		});
@@ -131,18 +138,21 @@
 			"success":function(obj){
 				var html='';
 				if(obj.success){
-					html+='<table>';
 					var arr=obj.data;
-					for(var i=0;i<arr.length;i++){
-						html+='<tr><td>'+arr[i].id+'</td><td><td>'+arr[i].reason+'</td>'+
-						'<td>'+arr[i].dayTime+'</td><td>'+arr[i].status+'</td>'
-						+'</tr>'
+					if(arr && arr.length>0){
+						html+='<table>';
+						for(var i=0;i<arr.length;i++){
+							html+='<tr><td>'+arr[i].id+'</td><td><td>'+arr[i].reason+'</td>'+
+							'<td>'+arr[i].dayTime+'</td><td>'+arr[i].status+'</td>'
+							+'</tr>'
+						}
+						html+='</table>';
+					}else{
+						html+='<h2>暂无请假信息</h2>';
 					}
-					
-				html+='</table>';
-				$("#showLeaveList").html(html);
+					$("#showLeaveList").html(html);
 				}else{
-					alert("fail!")
+				$("#showLeaveList").html("<h>Fail</h>");
 				}
 			}
 		});

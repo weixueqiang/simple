@@ -108,6 +108,15 @@
       #{status,jdbcType=VARCHAR}, #{dayTime,jdbcType=INTEGER}, #{proDefId,jdbcType=VARCHAR}
       )
   </insert>
+   <insert id="save" parameterType="com.jo.dy.ot.entity.LeaveBill" useGeneratedKeys="true" keyProperty="id"
+   >
+    insert into leave_bill ( user_id, reason, 
+      status, day_time, pro_def_id
+      )
+    values ( #{userId,jdbcType=INTEGER}, #{reason,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{dayTime,jdbcType=INTEGER}, #{proDefId,jdbcType=VARCHAR}
+      )
+  </insert>
   <insert id="insertSelective" parameterType="com.jo.dy.ot.entity.LeaveBill" >
     insert into leave_bill
     <trim prefix="(" suffix=")" suffixOverrides="," >

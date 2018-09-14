@@ -1,8 +1,9 @@
 package com.jo.dy.ot.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class SysWorkflow {
+public class SysWorkflow implements Serializable{
     private Long id;
 
     private String name;

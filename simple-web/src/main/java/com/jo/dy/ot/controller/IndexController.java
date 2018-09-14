@@ -40,6 +40,11 @@ public class IndexController extends BaseController{
 		return "index";
 	}
 	
+	@RequestMapping("/flow")
+	public String getFlowPng() {
+		return "flow";
+	}
+
 	@RequestMapping("/leaveBill")
 	public String leave() {
 		return "leaveBill";

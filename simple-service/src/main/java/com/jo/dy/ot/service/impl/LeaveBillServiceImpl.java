@@ -45,17 +45,8 @@ public class LeaveBillServiceImpl implements LeaveBillService {
 	private SysFlowFormMapper sysFlowFormMapper;
 	@Resource
 	private SysWorkflowMapper sysWorkflowMapper;
-
-	@Resource
-	private TaskService taskService;
-	@Resource
-	private RepositoryService repositoryService;
-	@Resource
-	private RuntimeService runtimeService;
-
-	private static String processDefinitionKey = "LeaveBill";
-	private static String businessKey = "leaveBillService";
-
+	
+	
 	private String getName() {
 		Service annotation = this.getClass().getAnnotation(Service.class);
 		if (annotation != null) {
@@ -74,27 +65,17 @@ public class LeaveBillServiceImpl implements LeaveBillService {
 			return result;
 		}
 		leaveBill.setStatus(StatusEnum.BE_SUBMIT.name());
-		leaveBillMapper.insertSelective(leaveBill);
-		Map<String, Object> params = new HashMap<>();
-		params.put("userId", leaveBill.getUserId() + "");
-		params.put("serviceName", getName());
-		params.put("businessId", leaveBill.getId());
-		ProcessInstance pi = runtimeService.startProcessInstanceByKey(processKey, params);
-		// leaveBill.setProDefId(pi.getProcessInstanceId());
+		leaveBillMapper.save(leaveBill);
+		//启动流程
+		processService.startProcess(processKey, leaveBill.getUserId() + "", getName(),
+				leaveBill.getId());
 		return result;
 	}
 
 	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public Result submitLeave(Integer id, Integer userId) {
-
-		return null;
-	}
-
-	@Override
-	public List<LeaveBill> list(int i) {
+	public List<LeaveBill> list(Integer userId) {
 		LeaveBillExample example = new LeaveBillExample();
-		example.createCriteria().andUserIdEqualTo(i);
+		example.createCriteria().andUserIdEqualTo(userId);
 		return leaveBillMapper.selectByExample(example);
 	}
 
@@ -104,56 +85,6 @@ public class LeaveBillServiceImpl implements LeaveBillService {
 		leaveBillMapper.updateByPrimaryKeySelective(leaveBill);
 	}
 
-	@Override
-	public Result getTask(String taskId) {
-		Result result = new Result();
-		if (StringUtil.isEmpty(taskId)) {
-			result.fail("任务id为空");
-			return result;
-		}
-		Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
-		// String processDefinitionId=task.getProcessDefinitionId();
-		// List<String> listFlow =
-		// processService.listFlow(processInstanceId,processDefinitionId);
-		// result.putData("listFlow", listFlow);
-		String processInstanceId = task.getProcessInstanceId();
-		String executionId= task.getExecutionId();
-		Integer id=runtimeService.getVariable(executionId, "businessId", Integer.class);
-		String serviceName=runtimeService.getVariable(executionId, "serviceName", String.class);
-//		ProcessInstance singleResult = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId)
-//				.singleResult();
-//		Map<String, Object> processVariables = singleResult.getProcessVariables();
-//		
-//		Map<String, Object> params = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId)
-//				.singleResult().getProcessVariables();
-//		Integer id = (Integer) params.get("businessId");
-//		String serviceName = (String) params.get("serviceName");
-		BasicProcess bean = SpringUtils.getBean(serviceName);
-		Object data = bean.get(id);
-		result.setData(data);
-		List<Comment> listComment = processService.listComment(processInstanceId);
-		result.putData("listComment", listComment);
-		return result;
-	}
-
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public Result complate(String taskId, Integer id, String comment, String condition, Integer userId) {
-		LeaveBill leaveBill = leaveBillMapper.selectByPrimaryKey(id);
-		processService.saveComment(taskId, comment, userId, leaveBill.getProDefId());
-		Map<String, Object> variables = new HashMap<>();
-		variables.put("condition", condition);
-		taskService.complete(taskId, variables);
-		ProcessInstance instance = runtimeService.createProcessInstanceQuery()
-				.processInstanceId(leaveBill.getProDefId()).singleResult();
-		if (instance == null) {
-			leaveBill.setStatus(StatusEnum.ACCPECT.name());
-		} else {
-			leaveBill.setStatus(StatusEnum.APPLY.name());
-		}
-		leaveBillMapper.updateByPrimaryKeySelective(leaveBill);
-		return new Result();
-	}
 
 	@Override
 	public String getProcessKey(String customeId) {
@@ -166,12 +97,11 @@ public class LeaveBillServiceImpl implements LeaveBillService {
 	}
 
 	@Override
-	public void dealBusiness(Integer id, Boolean flag) {
-		LeaveBill record=new LeaveBill();
+	public void dealBusiness(Integer id, String flag) {
+		LeaveBill record = new LeaveBill();
 		record.setId(id);
-		record.setStatus(flag ? StatusEnum.ACCPECT.name():StatusEnum.FAIL.name());
+		record.setStatus(flag);
 		leaveBillMapper.updateByPrimaryKeySelective(record);
-		
 	}
 
 }

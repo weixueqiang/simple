@@ -45,22 +45,25 @@ public class SysWorkflowServiceImpl implements SysWorkflowService {
 		process.setId(model.getProcessKey());//流程key
 		process.setName(model.getName());//流程名称
 		process.setDocumentation(model.getContent());//流程描述
+		Result result=new Result();
+		try {
+			process.addFlowElement(createStartEvent());//创建开始节点
+			createUserTask(sysWorkflowSteps, process);//创建任务节点
+			process.addFlowElement(createEndEvent());//创建结束节点
+			
+			createFlowSequence(sysWorkflowSteps, process);//创建节点间的连线
+			
+			new BpmnAutoLayout(bpmnModel).execute();//生成模型
+			//部署流程
+			repositoryService.createDeployment().addBpmnModel(process.getId() + ".bpmn", bpmnModel)
+					.name(process.getName()).deploy();
+			saveWorkflow(model, sysWorkflowSteps);//保存自定义的数据
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result.fail("请检查流程是否正确!");
+		}
 		
-		process.addFlowElement(createStartEvent());//创建开始节点
-		createUserTask(sysWorkflowSteps, process);//创建任务节点
-		process.addFlowElement(createEndEvent());//创建结束节点
-		
-		createFlowSequence(sysWorkflowSteps, process);//创建节点间的连线
-		
-		new BpmnAutoLayout(bpmnModel).execute();//生成模型
-		//部署流程
-		Deployment deploy = repositoryService.createDeployment().addBpmnModel(process.getId() + ".bpmn", bpmnModel)
-				.name(process.getName()).deploy();
-		//获取流程定义对象
-		ProcessDefinition proDef = repositoryService.createProcessDefinitionQuery().deploymentId(deploy.getId())
-				.singleResult();
-		saveWorkflow(model, sysWorkflowSteps);//保存自定义的数据
-		return null;
+		return result;
 	}
 
 	private void createFlowSequence(List<SysWorkflowStep> sysWorkflowSteps, Process process) {
@@ -126,13 +129,14 @@ public class SysWorkflowServiceImpl implements SysWorkflowService {
 	}
 
 	private void saveWorkflow(SysWorkflow model, List<SysWorkflowStep> sysWorkflowSteps) {
-		int id = sysWorkflowMapper.insertSelective(model);
+//		int id = sysWorkflowMapper.insertSelective(model);
+		sysWorkflowMapper.save(model);
 		for (SysWorkflowStep step : sysWorkflowSteps) {
-			step.setWorkflowId(Long.valueOf(id + ""));
+			step.setWorkflowId(model.getId());
 			step.setCreateTime(new Date());
 			 sysWorkflowStepMapper.insertSelective(step);
 		}
-//		sysWorkflowStepMapper.batchCreate(sysWorkflowSteps);
+		sysWorkflowStepMapper.batchCreate(sysWorkflowSteps);
 	}
 
 	private List<String> getUserIds(SysWorkflowStep sysWorkflowStep) {

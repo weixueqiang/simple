@@ -1,6 +1,8 @@
 package com.jo.dy.ot.entity;
 
-public class SysFlowForm {
+import java.io.Serializable;
+
+public class SysFlowForm implements Serializable{
     private Integer id;
 
     private String serviceName;

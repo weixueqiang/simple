@@ -10,16 +10,20 @@
 </head>
 <body>
 	<h1>center___</h1>
-	<div id="myInfo">
-	</div>
-	<div><a href="${base}/leaveBill">请假</a></div>
 	<div>
+		<a href="${base}/leaveBill">请假</a><a href="${base }/logout">退出</a>
+		<a href="${base }/flow">flow</a>
+	<div>
+	<div id="myInfo"></div>
+	</div>
+		<p>shiro权限测试,数据转换测试</p>
 		<div id="showUser">
 			id:<input type="text" /><input type="button" value="ajax显示一个用户" />
 		</div>
 		<div id="showUser_"></div>
 	</div>
 	<div>
+		<p>mybatis分页测试</p>
 		<div id="showPage">
 			page:<input type="text" value="1" /> limit:<input type="text"
 				value="10" /><input type="button" value="分页用户" />
@@ -28,19 +32,15 @@
 		<div id="showPage_list"></div>
 	</div>
 	<div>
+		<p>新增权限功能:测试VO数据校验</p>
 		<form action="${base}/permission/save" method="post">
 			name:<input name="name" /><br> code:<input name="code" /><br>
 			createTime:<input name="createTime" /><br> <input type="submit"
 				value="提交" />
 		</form>
 	</div>
-	<!-- <div>
-		<form>
-			file:<input type="file" name="file" id="FileUpload" /> <input
-				type="button" value="提交" id="btn_uploadimg" />
-		</form>
-	</div> -->
 	<div>
+		<p>图片上传测试</p>
 		<input type="file" name="file" id="FileUpload">
 		 <a class="layui-btn layui-btn-mini" id="btn_uploadimg">上传图片</a>
 	</div>
@@ -85,7 +85,7 @@
 		"success":function(obj){
 			var html='';
 			if(obj.success){
-				html=obj.data.id+'__'+obj.data.username+'__'+obj.data.password+'__';
+				html='我的信息,Id: '+obj.data.id+' 名称: '+obj.data.username+' 加密密码: '+obj.data.password;
 			}else{
 				html=obj.msg;
 			}
