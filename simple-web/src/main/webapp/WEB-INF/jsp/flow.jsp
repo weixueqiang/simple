@@ -13,6 +13,21 @@
 	<div>
 		<a href="${base}/leaveBill">请假</a><a href="${base }/logout">退出</a>
 	<div>
+	<div><h3>自定义流程列表</h3></div>
+	<div id="listProcess"></div>
+	<div><h3>业务与流程关联,不想写编辑了</h3></div>
+	<div id="listForm"></div>
+	
+	<div>
+		<p>新增自定义流程</p>
+		<form id="process_form">
+			<p>名称:<input name="name" ></p>
+			<p>描述:<input name="content" ></p>
+			
+			<p>任务Json:<textarea rows="10" cols="100" name="stepArr"></textarea></p>
+			<p><input type="button" value="提交" onclick="saveProcess()"></p>
+		</form>
+	</div>
 	<div>
 		<p>新增demo</p>
 		<p>会签指定人员:[{"usersId":"b1,b2,b3","type":1,"seq":0}]</p>
@@ -25,16 +40,6 @@
 		<p>type:会签1,或签2</p>
 		<p>seq:任务排序</p>
 	</div>
-	<div>
-		<p>新增自定义流程</p>
-		<form id="process_form">
-			<p>名称:<input name="name" ></p>
-			<p>描述:<input name="content" ></p>
-			<p>任务Json:<input name="stepArr" ></p>
-			<p><input type="button" value="提交" onclick="saveProcess()"></p>
-		</form>
-	</div>
-	
 </body>
 <script type="text/javascript" src="${base}/js/jquery.js"></script>
 <script type="text/javascript">
@@ -47,11 +52,50 @@
 			"type":"post",
 			"dataType":"json",
 			success:function(){
-				
+				listProcess();
 			}
 		});
-		
 	}
+	
+	function listProcess(){
+		$.ajax({
+			"url":"${base}/flow/listProcess",
+			"type":"get",
+			"dataType":"json",
+			success:function(obj){
+				var html='';
+				var arr=obj.data;
+				for (var i = 0; i < arr.length; i++) {
+					var data=arr[i];
+					html+='<p>'+data.id+' _ '+data.name+' _ '+data.processKey+' _ '+data.content+'</p>'
+				}
+				$("#listProcess").html(html);
+			}
+		});
+	}
+	
+	function listForm(){
+		$.ajax({
+			"url":"${base}/flow/listForm",
+			"type":"get",
+			"dataType":"json",
+			success:function(obj){
+				var html='';
+				var arr=obj.data;
+				for (var i = 0; i < arr.length; i++) {
+					var data=arr[i];
+					html+='<p>'+data.id+' _ '+data.serviceName+' _ '+data.workflowId+' _ '+data.name+'</p>'
+				}
+				$("#listForm").html(html);
+			}
+		});
+	}
+	
+	$(function(){
+		listProcess();
+		listForm();
+	})
+	
 </script>
 
 </html>

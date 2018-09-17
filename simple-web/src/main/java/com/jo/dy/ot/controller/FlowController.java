@@ -22,10 +22,26 @@ public class FlowController {
 	private SysWorkflowService sysWorkflowService;
 
 	@RequestMapping("/deploy")
-	public Result upload(SysWorkflow sysWorkflow, String stepArr){
+	public Result deploy(SysWorkflow sysWorkflow, String stepArr){
 		sysWorkflow.setProcessKey("_"+UUID.randomUUID().toString());
-//		return new Result();
 		return sysWorkflowService.simpleSave(sysWorkflow, stepArr);
+	}
+	
+	@RequestMapping("/listProcess")
+	public Result listProcess(){
+		String customId="";
+		return sysWorkflowService.listProcess(customId);
+	}
+	
+	@RequestMapping("/listForm")
+	public Result listForm(){
+		String customId="";
+		return sysWorkflowService.listBusiness(customId);
+	}
+	
+	@RequestMapping("/bingdingFlow")
+	public Result bingdingFlow(Long workflowId,Integer formId){
+		return sysWorkflowService.bingdingFlow(workflowId,formId);
 	}
 	
 }

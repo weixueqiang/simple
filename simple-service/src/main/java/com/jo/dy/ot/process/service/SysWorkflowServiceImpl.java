@@ -17,9 +17,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSONArray;
+import com.jo.dy.ot.dao.SysFlowFormMapper;
 import com.jo.dy.ot.dao.SysWorkflowMapper;
 import com.jo.dy.ot.dao.SysWorkflowStepMapper;
+import com.jo.dy.ot.entity.SysFlowForm;
+import com.jo.dy.ot.entity.SysFlowFormExample;
 import com.jo.dy.ot.entity.SysWorkflow;
+import com.jo.dy.ot.entity.SysWorkflowExample;
 import com.jo.dy.ot.entity.SysWorkflowStep;
 import com.jo.dy.ot.service.SysWorkflowService;
 
@@ -34,6 +38,8 @@ public class SysWorkflowServiceImpl implements SysWorkflowService {
 	private SysWorkflowMapper sysWorkflowMapper;
 	@Resource
 	private SysWorkflowStepMapper sysWorkflowStepMapper;
+	@Resource
+	private SysFlowFormMapper sysFlowFormMapper;
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
@@ -130,10 +136,12 @@ public class SysWorkflowServiceImpl implements SysWorkflowService {
 
 	private void saveWorkflow(SysWorkflow model, List<SysWorkflowStep> sysWorkflowSteps) {
 //		int id = sysWorkflowMapper.insertSelective(model);
+		Date createTime = new Date();
+		model.setCreateTime(createTime);
 		sysWorkflowMapper.save(model);
 		for (SysWorkflowStep step : sysWorkflowSteps) {
 			step.setWorkflowId(model.getId());
-			step.setCreateTime(new Date());
+			step.setCreateTime(createTime);
 			 sysWorkflowStepMapper.insertSelective(step);
 		}
 		sysWorkflowStepMapper.batchCreate(sysWorkflowSteps);
@@ -245,6 +253,31 @@ public class SysWorkflowServiceImpl implements SysWorkflowService {
 		userTask.setId(id);
 		userTask.setCandidateUsers(userIds);
 		return userTask;
+	}
+
+	@Override
+	public Result listBusiness(String customId) {
+		Result result = new Result();
+		List<SysFlowForm> selectByExample = sysFlowFormMapper.selectByExample(new SysFlowFormExample());
+		result.setData(selectByExample);
+		return result;
+	}
+
+	@Override
+	public Result listProcess(String customId) {
+		Result result = new Result();
+		List<SysWorkflow> selectByExample = sysWorkflowMapper.selectByExample(new SysWorkflowExample());
+		result.setData(selectByExample);
+		return result;
+	}
+
+	@Override
+	public Result bingdingFlow(Long workflowId, Integer formId) {
+		SysFlowForm record=new SysFlowForm();
+		record.setId(formId);
+		record.setWorkflowId(workflowId);
+		sysFlowFormMapper.updateByPrimaryKeySelective(record);
+		return new Result();
 	}
 
 }
