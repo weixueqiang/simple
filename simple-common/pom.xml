@@ -9,26 +9,36 @@
 	</parent>
 	<artifactId>simple-common</artifactId>
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		
+		<!-- 工具包 start -->
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.4</version>
 		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.8.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.7</version>
+		</dependency>
+		<!-- 工具包 end -->
 
+		<!-- activiti start -->
 		<dependency>
 			<groupId>org.activiti</groupId>
 			<artifactId>activiti-engine</artifactId>
 			<version>5.22.0</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.activiti/activiti-bpmn-layout -->
 		<dependency>
 			<groupId>org.activiti</groupId>
 			<artifactId>activiti-bpmn-layout</artifactId>
 			<version>5.22.0</version>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.activiti/activiti-spring -->
 		<dependency>
 			<groupId>org.activiti</groupId>
 			<artifactId>activiti-spring</artifactId>
@@ -40,31 +50,27 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
+		<!-- activiti start -->
+		
 		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
 			<version>1.8.3</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
-		<dependency>
-			<groupId>commons-beanutils</groupId>
-			<artifactId>commons-beanutils</artifactId>
-			<version>1.8.3</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.sun.mail/javax.mail -->
+		
+		
+	<!-- 发送邮件 start -->
 		<dependency>
 			<groupId>com.sun.mail</groupId>
 			<artifactId>javax.mail</artifactId>
 			<version>1.6.1</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/javax.activation/activation -->
 		<dependency>
 			<groupId>javax.activation</groupId>
 			<artifactId>activation</artifactId>
 			<version>1.1</version>
 		</dependency>
-
+<!-- 发送邮件 end -->
 
 
 		<!-- spring start -->
@@ -77,13 +83,7 @@
 			<artifactId>spring-core</artifactId>
 		</dependency>
 		<!-- spring end -->
-		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.7</version>
-		</dependency>
-
+		<!-- mybatis 工具 -->
 		<dependency>
 			<groupId>org.mybatis.generator</groupId>
 			<artifactId>mybatis-generator-core</artifactId>
@@ -92,6 +92,7 @@
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper</artifactId>
 		</dependency>
+		<!-- mybatis 工具 -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

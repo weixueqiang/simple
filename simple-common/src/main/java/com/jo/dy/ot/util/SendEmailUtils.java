@@ -38,7 +38,9 @@ public class SendEmailUtils {
 	static {
 		Properties prop = new Properties();
 		try {
-			// SendEmailUtils.class.getClassLoader().getSystemResourceAsStream("email.properties");
+			//SendEmailUtils.class.getClassLoader().getResourceAsStream("email.properties")从classPath下获取
+			//SendEmailUtils.class.getResourceAsStream("email.properties")与当面类同级下获取
+			//SendEmailUtils.class.getResourceAsStream("/email.properties")加/ ,从classPath下获取
 			prop.load(SendEmailUtils.class.getClassLoader().getResourceAsStream("email.properties"));
 			from = prop.getProperty("from");
 			password = prop.getProperty("password");

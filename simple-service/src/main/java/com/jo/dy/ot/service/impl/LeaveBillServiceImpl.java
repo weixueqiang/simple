@@ -1,21 +1,11 @@
 package com.jo.dy.ot.service.impl;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.activiti.engine.RepositoryService;
-import org.activiti.engine.RuntimeService;
-import org.activiti.engine.TaskService;
-import org.activiti.engine.impl.persistence.entity.VariableInstance;
-import org.activiti.engine.runtime.ProcessInstance;
-import org.activiti.engine.task.Comment;
-import org.activiti.engine.task.Task;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
 import com.github.pagehelper.util.StringUtil;
 import com.jo.dy.ot.dao.LeaveBillMapper;
@@ -23,16 +13,10 @@ import com.jo.dy.ot.dao.SysFlowFormMapper;
 import com.jo.dy.ot.dao.SysWorkflowMapper;
 import com.jo.dy.ot.entity.LeaveBill;
 import com.jo.dy.ot.entity.LeaveBillExample;
-import com.jo.dy.ot.entity.SysFlowForm;
-import com.jo.dy.ot.entity.SysFlowFormExample;
-import com.jo.dy.ot.entity.SysWorkflow;
 import com.jo.dy.ot.enums.StatusEnum;
-import com.jo.dy.ot.service.BasicProcess;
 import com.jo.dy.ot.service.LeaveBillService;
 import com.jo.dy.ot.service.ProcessService;
-import com.jo.dy.ot.util.BeanUtils;
 import com.jo.dy.ot.util.Result;
-import com.jo.dy.ot.util.SpringUtils;
 
 @Service("leaveBillService")
 public class LeaveBillServiceImpl implements LeaveBillService {
