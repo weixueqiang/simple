@@ -33,21 +33,21 @@ public class LeaveController {
 
 	@RequestMapping("save")
 	public Result save(LeaveBill leaveBill) {
-		leaveBill.setUserId(MyUtils.getUser().getId());
+		leaveBill.setUserId(MyUtils.getUserId());
 		return leaveBillService.save(leaveBill);
 	}
 
 	@RequestMapping("list")
 	public Result list() {
 		Result result = new Result();
-		result.setData(leaveBillService.list(MyUtils.getUser().getId()));
+		result.setData(leaveBillService.list(MyUtils.getUserId()));
 		return result;
 	}
 
 	@RequestMapping("listTask")
 	public Result listTask() {
 		Result result = new Result();
-		result.setData(processService.listByUsers(MyUtils.getUser().getId()+"",
+		result.setData(processService.listByUsers(MyUtils.getUserId()+"",
 				leaveBillService.getProcessKey(null)));
 		return result;
 	}
@@ -59,7 +59,7 @@ public class LeaveController {
 
 	@RequestMapping("/complate")
 	public Result complate(String taskId, String comment,Boolean flag) {
-		return processService.complateTask(taskId,comment,MyUtils.getUser().getId(),flag);
+		return processService.complateTask(taskId,comment,MyUtils.getUserId(),flag);
 	}
 
 }

@@ -26,7 +26,7 @@ public class PermissionController {
 	private PermissionService permissionService;
 	
 	/**
-	 * 数据校验测试
+	 * 数据校验测试,需注意BindingResult对象需要紧跟在VO后面
 	 * @date 2018年8月17日 下午5:44:32
 	 * @author weixueqiang
 	 */

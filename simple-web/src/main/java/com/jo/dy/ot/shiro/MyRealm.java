@@ -31,6 +31,9 @@ public class MyRealm extends AuthorizingRealm {
 	@Resource
 	private UserService userService;
 
+	/**
+	 * 授权操作
+	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection arg0) {
 		MyPrincipal myPrincipal = (MyPrincipal) super.getAvailablePrincipal(arg0);
@@ -45,6 +48,9 @@ public class MyRealm extends AuthorizingRealm {
 		return info;
 	}
 
+	/**
+	 * 认证操作
+	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken arg0) throws AuthenticationException {
 		MyUsernamePasswordToken token = (MyUsernamePasswordToken) arg0;

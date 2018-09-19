@@ -24,7 +24,7 @@ public class MyCredentials extends SimpleCredentialsMatcher {
 		LoginTypeEnmu type = myToken.getType();
 		if(LoginTypeEnmu.PASSWORD.equals(type)) {
 			ByteSource salt = myInfo.getCredentialsSalt();
-			String hash = MySimpleHash.get(myToken.getPassword(), salt,getHashIterations());
+			String hash = "";
 			try {
 				hash=SHA1.digest(new String(myToken.getPassword())
 						+new String(myInfo.getCredentialsSalt().getBytes(),"utf-8"));

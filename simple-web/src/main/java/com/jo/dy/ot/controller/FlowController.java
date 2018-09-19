@@ -21,12 +21,18 @@ public class FlowController {
 	@Resource
 	private SysWorkflowService sysWorkflowService;
 
+	/**
+	 * 部署流程
+	 */
 	@RequestMapping("/deploy")
 	public Result deploy(SysWorkflow sysWorkflow, String stepArr){
 		sysWorkflow.setProcessKey("_"+UUID.randomUUID().toString());
 		return sysWorkflowService.simpleSave(sysWorkflow, stepArr);
 	}
 	
+	/**
+	 * 获取所有的SysWorkflow对象
+	 */
 	@RequestMapping("/listProcess")
 	public Result listProcess(){
 		String customId="";

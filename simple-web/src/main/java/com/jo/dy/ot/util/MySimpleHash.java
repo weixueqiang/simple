@@ -5,7 +5,7 @@ import org.apache.shiro.crypto.UnknownAlgorithmException;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 import org.apache.shiro.util.StringUtils;
-
+@Deprecated
 public class MySimpleHash extends SimpleHash {
 
 	private static final long serialVersionUID = 1L;

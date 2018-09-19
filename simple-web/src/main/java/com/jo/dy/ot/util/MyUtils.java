@@ -5,7 +5,10 @@ import org.apache.shiro.subject.Subject;
 
 import com.jo.dy.ot.entity.User;
 import com.jo.dy.ot.shiro.MyPrincipal;
-
+/**
+ * 通过shiro获取登录实体,通过实体获取各种用户数据
+ * 
+ */
 public class MyUtils {
 
 	public static MyPrincipal curMyPrincipal() {
@@ -17,4 +20,7 @@ public class MyUtils {
 		return curMyPrincipal().getUser();
 	}
 	
+	public static Integer getUserId() {
+		return getUser().getId();
+	}
 }
