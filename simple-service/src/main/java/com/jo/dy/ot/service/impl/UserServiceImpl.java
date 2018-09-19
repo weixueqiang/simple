@@ -6,6 +6,9 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +26,8 @@ import com.jo.dy.ot.service.UserService;
 import com.jo.dy.ot.util.PageUtils;
 
 @Service("userService")
+//@Component("userService")
+//@Scope(proxyMode=ScopedProxyMode.TARGET_CLASS)
 public class UserServiceImpl implements UserService {
 
 	@Resource

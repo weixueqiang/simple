@@ -1,5 +1,8 @@
 package com.jo.dy.ot.redis.test;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -8,11 +11,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.jo.dy.ot.entity.User;
+import com.jo.dy.ot.model.PushModel;
+import com.jo.dy.ot.redis.SimpleDoWorkImpl;
 import com.jo.dy.ot.redis.dao.RedisDao;
 import com.jo.dy.ot.util.Constants;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:spring/spring-redis.xml","classpath:spring/spring-service.xml","classpath:spring/spring-dao.xml"})
+@ContextConfiguration({"classpath:spring/spring-redis.xml","classpath:spring/spring-service.xml",
+	"classpath:spring/spring-dao.xml","classpath:spring/spring-activiti.xml"})
 public class RedisDaoTest {
 
 	@Resource
@@ -36,8 +42,32 @@ public class RedisDaoTest {
 	
 	@Test
 	public void get() {
-		User object = (User) redisDao.get("user");
-		System.out.println(object.getUsername());
+		System.out.println(pushModelTest());
+		System.out.println("method...over2");
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			   e.printStackTrace();
+		}
 	}
+	
+	
+	
+	
+	public String pushModelTest() {
+		PushModel pushModel = new PushModel();
+		Set<String> set=new HashSet<>();
+		set.add("zhangsan");
+		set.add("lisi");
+		pushModel.setReceiverSet(set);
+		SimpleDoWorkImpl simpleDoWorkImpl = new SimpleDoWorkImpl();
+		simpleDoWorkImpl.setPushModel(pushModel);
+		redisDao.save(Constants.REDIS_CHANNEL,simpleDoWorkImpl);
+		redisDao.convertAndSend(Constants.REDIS_CHANNEL, Constants.REDIS_CHANNEL);
+		return "ok";
+	}
+	
+	
 	
 }

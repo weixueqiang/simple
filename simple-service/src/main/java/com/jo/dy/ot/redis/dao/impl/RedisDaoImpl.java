@@ -10,7 +10,7 @@ import com.jo.dy.ot.redis.dao.RedisDao;
 @Component("redisDao")
 public class RedisDaoImpl implements RedisDao{
 
-	//@Resource
+	@Resource
 	private RedisTemplate<String, Object> redisTemplate;
 	
 	public void save(String key,Object value) {

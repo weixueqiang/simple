@@ -6,5 +6,10 @@ public interface RedisDao {
 	
 	Object get(String key);
 	
+	/**
+	 * 订阅推送
+	 * @date 2018年9月19日 下午3:36:23
+	 * @author weixueqiang
+	 */
 	void convertAndSend(String channel,Object value);
 }
