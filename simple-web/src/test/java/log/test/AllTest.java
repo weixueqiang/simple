@@ -1,9 +1,12 @@
 package log.test;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
@@ -55,7 +58,11 @@ public class AllTest {
 	
 	@Test
 	public void arrTest() {
-		System.out.println(UUID.randomUUID());
+		List<Object> list=new ArrayList<>();
+		String s=null;
+		list.add(s);
+		String ss=(String) list.get(0);
+		System.out.println(StringUtils.isNotBlank(ss));
 	}
 	
 	

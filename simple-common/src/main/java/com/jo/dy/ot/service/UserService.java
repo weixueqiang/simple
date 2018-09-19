@@ -12,5 +12,8 @@ public interface UserService {
 	PageUtils<User> showPage(PageUtils<User> page);
 
 	User getByName(String username);
+
+	void saveNoTranction();
 	
+	void saveWithTranction();
 }

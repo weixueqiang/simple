@@ -1,10 +1,12 @@
 package com.jo.dy.ot.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
@@ -49,6 +51,57 @@ public class PermissionServiceImpl implements PermissionService {
 		}
 		
 		return result;
+	}
+
+	@Override
+	@Transactional(rollbackFor=Exception.class)
+	public void saveWithTranction() {
+		String s="s1";
+		Permission record=new Permission(null, s, s, s, new Date());
+		permissionMapper.insertSelective(record);
+		int i = 1/0;
+	}
+
+	@Override
+	@Transactional(rollbackFor=Exception.class,propagation=Propagation.NEVER)
+	public void neverNeedTranction() {
+		String s="s1";
+		Permission record=new Permission(null, s, s, s, new Date());
+		permissionMapper.insertSelective(record);
+	}
+
+	@Override
+	@Transactional(rollbackFor=Exception.class,propagation=Propagation.REQUIRES_NEW)
+	public void requiresNewTranction() {
+		String s="s1";
+		Permission record=new Permission(null, s, s, s, new Date());
+		permissionMapper.insertSelective(record); 
+		int i = 1/0;
+	}
+
+	@Override
+	@Transactional(rollbackFor=Exception.class,propagation=Propagation.NESTED)
+	public void nestedTranction() {
+		String s="s1";
+		Permission record=new Permission(null, s, s, s, new Date());
+		permissionMapper.insertSelective(record); 
+	}
+
+	@Override
+	@Transactional(rollbackFor=Exception.class,propagation=Propagation.SUPPORTS)
+	public void supportsTranction() {
+		String s="s1";
+		Permission record=new Permission(null, s, s, s, new Date());
+		permissionMapper.insertSelective(record); 
+	}
+
+	@Override
+	@Transactional(rollbackFor=Exception.class,propagation=Propagation.NOT_SUPPORTED)
+	public void notSupportedTranction() {
+		String s="s1";
+		Permission record=new Permission(null, s, s, s, new Date());
+		permissionMapper.insertSelective(record);
+		int i=1/0;
 	}
 
 }
