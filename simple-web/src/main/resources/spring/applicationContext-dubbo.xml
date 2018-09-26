@@ -17,7 +17,7 @@
     <dubbo:application name="dubbo_consumer"  />  
   
     <dubbo:registry  protocol="zookeeper" address="zookeeper://127.0.0.1:2181" />   
-     <dubbo:consumer filter="myDubboFilter"></dubbo:consumer>
+     <dubbo:consumer filter="myDubboFilter" check="false"></dubbo:consumer>
     <dubbo:reference id="userSerivce" interface="com.jo.dy.ot.service.UserService" url="localhost:20880"/>
     <dubbo:reference id="leaveBillService" interface="com.jo.dy.ot.service.LeaveBillService" url="localhost:20880" />
     <dubbo:reference id="processService" interface="com.jo.dy.ot.service.ProcessService" url="localhost:20880" />

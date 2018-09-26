@@ -1,5 +1,7 @@
 package log.test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -21,6 +23,29 @@ public class AllTest {
     	int day = cal.get(Calendar.DAY_OF_WEEK);
     	System.out.println(day);
 	}
+	@Test
+	public void annoClassTest1() throws ParseException {
+		String beginTime="2018-08-08";
+		String endTime="2018-09-01";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date start = sdf.parse(beginTime);
+		Date end = sdf.parse(endTime);
+		Calendar cal=Calendar.getInstance();
+		cal.setTime(start);
+		List<Date> list=new ArrayList<>();
+		while(true) {
+			list.add(cal.getTime());
+			cal.add(Calendar.DAY_OF_YEAR, 1);
+			if(cal.getTime().compareTo(end)>0) {
+				break;
+			}
+		}
+		for(Date d:list) {
+			System.out.println(sdf.format(d));
+		}
+	}
+	
+	
 	
 	@Test
 	public void timeTest() {

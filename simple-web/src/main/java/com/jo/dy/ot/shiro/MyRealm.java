@@ -14,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -61,7 +62,7 @@ public class MyRealm extends AuthorizingRealm {
 		// User user=userService.getByName(username);
 		User user = users.get(username);
 		if (user == null) {
-			throw new RuntimeException("没有该用户!");
+			throw new UnknownAccountException();
 		}
 		MyPrincipal principal = new MyPrincipal();
 		principal.setUser(user);

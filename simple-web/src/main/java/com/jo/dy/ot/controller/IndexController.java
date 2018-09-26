@@ -37,7 +37,7 @@ public class IndexController extends BaseController{
 	 */
 	@RequestMapping("index.do")
 	public String index(HttpServletRequest request) {
-		return "index";
+		return "index2";
 	}
 	
 	@RequestMapping("/flow")
@@ -56,7 +56,7 @@ public class IndexController extends BaseController{
 	 */
 	@RequestMapping("center")
 	public String center() {
-		return "center";
+		return "center3";
 	}
 	
 	@RequestMapping("myInfo")

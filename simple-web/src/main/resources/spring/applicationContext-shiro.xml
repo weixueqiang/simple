@@ -55,7 +55,11 @@
 				/login:anon
 				/leaveBill:anon
 				/logout:logout
-				/js/*.js=anon
+				/**/*.jsp*= anon
+				/**/*.js= anon
+				/**/*.css= anon
+				/layui/*=anon
+				/image/*=anon
 				/token=token
 				/**=authc
 			</value>
