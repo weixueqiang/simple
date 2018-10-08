@@ -17,6 +17,16 @@ import com.jo.dy.ot.util.SHA1;
 public class AllTest {
 
 	@Test
+	public void time() {
+		Date date = new Date();
+		date.setTime(1537945843158L);
+		System.out.println(date);
+		System.out.println("O_s_aIJklV6hTCCHnJu-_j0t5HVqVeYViszP7qqmG1J7OMBNIGci9jUmGnOXZSsv".length());
+		
+	}
+	
+	
+	@Test
 	public void annoClassTest() {
 		Calendar cal=Calendar.getInstance();
     	cal.setTime(new Date());
