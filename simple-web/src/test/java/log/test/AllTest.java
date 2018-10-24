@@ -1,5 +1,7 @@
 package log.test;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -7,12 +9,33 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import com.jo.dy.ot.util.SHA1;
 
 public class AllTest {
+
+	@Test
+	public void readTitle() {
+		System.out.println(1);
+		File file = new File("D://b.sql");
+		System.out.println(2);
+		System.out.println(file);
+		String readFileToString;
+		try {
+			readFileToString = FileUtils.readFileToString(file, "gbk");
+			readFileToString = readFileToString.toUpperCase();
+			FileUtils.writeStringToFile(new File("D://c.sql"), readFileToString, "gbk");
+			System.out.println(readFileToString);
+			System.out.println(3);
+		} catch (IOException e) {
+			System.out.println(4);
+			//
+			e.printStackTrace();
+		}
+	}
 
 	@Test
 	public void time() {

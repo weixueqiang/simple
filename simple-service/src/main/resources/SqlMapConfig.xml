@@ -20,5 +20,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString" />
 	<setting name="logImpl" value="log4j2" />
 </settings>
-
+<plugins>
+	<plugin interceptor="com.jo.ot.dy.ot.mybatis.UUIDInterceptor"></plugin>
+</plugins>
 </configuration>
