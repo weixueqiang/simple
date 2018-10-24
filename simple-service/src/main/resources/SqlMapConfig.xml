@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<setting name="localCacheScope" value="SESSION" />
 	<setting name="jdbcTypeForNull" value="OTHER" />
 	<setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString" />
-	<setting name="logImpl" value="log4j2" />
+	<setting name="logImpl" value="log4j2" /> 
 </settings>
 <plugins>
 	<plugin interceptor="com.jo.ot.dy.ot.mybatis.UUIDInterceptor"></plugin>

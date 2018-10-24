@@ -29,8 +29,7 @@ public class LeaveBillServiceImpl implements LeaveBillService {
 	private SysFlowFormMapper sysFlowFormMapper;
 	@Resource
 	private SysWorkflowMapper sysWorkflowMapper;
-	
-	
+
 	private String getName() {
 		Service annotation = this.getClass().getAnnotation(Service.class);
 		if (annotation != null) {
@@ -50,9 +49,8 @@ public class LeaveBillServiceImpl implements LeaveBillService {
 		}
 		leaveBill.setStatus(StatusEnum.BE_SUBMIT.name());
 		leaveBillMapper.save(leaveBill);
-		//启动流程
-		processService.startProcess(processKey, leaveBill.getUserId() + "", getName(),
-				leaveBill.getId());
+		// 启动流程
+		processService.startProcess(processKey, leaveBill.getUserId() + "", getName(), leaveBill.getId());
 		return result;
 	}
 
@@ -68,7 +66,6 @@ public class LeaveBillServiceImpl implements LeaveBillService {
 	public void updateByKey(LeaveBill leaveBill) {
 		leaveBillMapper.updateByPrimaryKeySelective(leaveBill);
 	}
-
 
 	@Override
 	public String getProcessKey(String customeId) {

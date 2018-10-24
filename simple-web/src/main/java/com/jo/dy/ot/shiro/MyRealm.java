@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
-import javax.management.RuntimeErrorException;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -20,7 +19,6 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
-import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import com.jo.dy.ot.entity.Permission;
@@ -81,7 +79,7 @@ public class MyRealm extends AuthorizingRealm {
 		users.put(username, new User(9529, username, "331043e9c170b0a3dc7c98cd169ba28a1b8296c3", "salt"));
 
 		List<Permission> list = new ArrayList<>();
-		list.add(new Permission(1, "获取用户", "user:get"));
+		list.add(new Permission("1", "获取用户", "user:get"));
 		permissions.put(1, list);
 
 	}

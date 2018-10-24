@@ -45,9 +45,8 @@
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator> 
 		<!-- 指定数据库表 -->
-		<table tableName="sys_flow_form"></table>
-		<table tableName="sys_workflow"></table>
-		<table tableName="sys_workflow_step"></table>
+		<table tableName="permission"></table>
+	
 	
 		
   </context>
