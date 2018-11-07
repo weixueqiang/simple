@@ -38,6 +38,34 @@ public class AllTest {
 	}
 
 	@Test
+	public void lower() {
+		String s = "SELECT ESG.ID,ESG.SCHOOL_ID,ESG.STATUS,ESG.GRADE,ESG.GRADE_ID\r\n"
+				+ "  		FROM EDU_SCHOOL_GRADE ESG \r\n"
+				+ "  		LEFT JOIN EDU_GRADE_TEACHER EGT ON EGT.GRADE_ID = ESG.ID \r\n"
+				+ "				AND  EGT.TYPE in(' ') AND EGT.STATUS='NORMAL'\r\n"
+				+ "		INNER JOIN EDU_GRADE EG ON EG.ID = ESG.GRADE_ID  \r\n" + "	WHERE ESG.`STATUS` = 'NORMAL'\r\n"
+				+ "	GROUP BY ESG.GRADE_ID";
+		System.out.println(s.toLowerCase());
+
+	}
+
+	@Test
+	public void toUp() {
+		String s = "CREATE TABLE `biz_examination_score` (\r\n" + "  `id` varchar(24) NOT NULL COMMENT '考试成绩标识',\r\n"
+				+ "  `examination_record_id` varchar(24) NOT NULL COMMENT '考试记录标识',\r\n"
+				+ "  `school_id` varchar(24) NOT NULL COMMENT '学校标识',\r\n"
+				+ "  `class_id` varchar(24) NOT NULL COMMENT '班级标识',\r\n"
+				+ "  `student_id` varchar(24) NOT NULL COMMENT '学生标识',\r\n"
+				+ "  `score` decimal(5,1) DEFAULT NULL COMMENT '分数',\r\n"
+				+ "  `create_time` datetime DEFAULT NULL COMMENT '创建时间',\r\n"
+				+ "  `update_time` datetime DEFAULT NULL COMMENT '更新时间',\r\n"
+				+ "  `creator` varchar(24) DEFAULT NULL COMMENT '创建者',\r\n"
+				+ "  `status` char(1) DEFAULT NULL COMMENT '状态',\r\n" + "  PRIMARY KEY (`id`)\r\n"
+				+ ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='考试成绩';\r\n" + "\r\n" + "";
+		System.out.println(s.toUpperCase());
+	}
+
+	@Test
 	public void time() {
 		Date date = new Date();
 		date.setTime(1539619200000L);
