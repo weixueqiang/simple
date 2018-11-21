@@ -2,12 +2,15 @@ package log.test;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -16,6 +19,28 @@ import org.junit.Test;
 import com.jo.dy.ot.util.SHA1;
 
 public class AllTest {
+
+	@Test
+	public void BigDecimalToString() {
+		BigDecimal bigDecimal = new BigDecimal(1.100);
+		double doubleValue = bigDecimal.doubleValue();
+		System.out.println(doubleValue);
+		String num = doubleValue + "";
+		while (num.endsWith("0")) {
+			num = num.substring(0, num.length() - 1);
+		}
+		if (num.endsWith(".")) {
+			num = num.substring(0, num.length() - 1);
+		}
+		System.out.println(num);
+	}
+
+	@Test
+	public void assertTest() {
+		String id = null;
+		assert StringUtils.isBlank(id) : "测试报错!";
+		assert StringUtils.isNotBlank(id) : "测试报错!";
+	}
 
 	@Test
 	public void readTitle() {
@@ -149,7 +174,8 @@ public class AllTest {
 
 	@Test
 	public void serializableUtilsTest() {
-
+		// Function<List<String>, Stream<String>> fun=ArrayList::stream;
+		Function<List<String>, Stream<String>> fun = s -> s.stream();
 	}
 
 }
