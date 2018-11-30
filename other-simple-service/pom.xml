@@ -10,6 +10,12 @@
 	<artifactId>other-simple-service</artifactId>
 
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.jboss.netty/netty -->
+		<dependency>
+			<groupId>org.jboss.netty</groupId>
+			<artifactId>netty</artifactId>
+			<version>3.2.6.Final</version>
+		</dependency>
 		<dependency>
 			<artifactId>elastic-job-common-core</artifactId>
 			<groupId>com.dangdang</groupId>

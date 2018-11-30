@@ -6,9 +6,12 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -19,6 +22,38 @@ import org.junit.Test;
 import com.jo.dy.ot.util.SHA1;
 
 public class AllTest {
+
+	@Test
+	public void s3t() {
+		Set<String> set = new HashSet<String>();
+		set.add("sg");
+		System.out.println("........" + set.add(null));
+		System.out.println("........" + set.add(null));
+		System.out.println(set.size());
+
+	}
+
+	@Test
+	public void st() {
+		Stream<String> stream = Arrays.stream(new String[] { "a", "b" });
+		stream.forEach(System.out::println);
+		stream.forEach(System.out::println);
+	}
+
+	@Test
+	public void ff() {
+
+		double d = 3.1465926;
+		String result = String.format("%.2d", d);
+		System.out.println(result);
+		// result = String.format("%.2f", 3f);
+		// System.out.println(result);
+		// result = String.format("%.2f", 0f);
+		// System.out.println(result);
+		// result = String.format("%.2f", 0.1);
+		// System.out.println(result);
+
+	}
 
 	@Test
 	public void BigDecimalToString() {
