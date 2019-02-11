@@ -1,5 +1,10 @@
 package com.jo.ot.dy.ot.mybatis;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
+
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;
@@ -10,10 +15,6 @@ import org.apache.ibatis.plugin.Invocation;
 import org.apache.ibatis.plugin.Plugin;
 import org.apache.ibatis.plugin.Signature;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.Properties;
-import java.util.Set;
-
 @Intercepts({ @Signature(type = Executor.class, method = "update", args = { MappedStatement.class, Object.class }) })
 public class UUIDInterceptor implements Interceptor {
 
@@ -21,7 +22,7 @@ public class UUIDInterceptor implements Interceptor {
 	public Object intercept(Invocation invocation) throws Throwable {
 
 		Object[] args = invocation.getArgs();
-		if (args == null || args.length != 2 || !(args[0] instanceof MappedStatement)) {
+		if (args == null || args.length != 2 || !(args[0] instanceof MappedStatement) || (args[1] instanceof Map)) {
 			return invocation.proceed();
 		}
 		MappedStatement mappedStatement = (MappedStatement) args[0];

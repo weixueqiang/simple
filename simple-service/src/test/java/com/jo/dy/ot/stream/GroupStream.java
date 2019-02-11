@@ -44,4 +44,23 @@ public class GroupStream {
 
 	}
 
+	@Test
+	public void toMap() {
+		// ArrayList<Map<String, Object>> arrayList = new ArrayList<>();
+		// for (int i = 0; i < 10; i++) {
+		// Map<String, Object> hashMap = new HashMap<>();
+		// hashMap.put("1", "a" + i);
+		// arrayList.add(hashMap);
+		// }
+		// arrayList.stream().collect(Collectors.toMap(e -> e, a -> a));
+		List<Person> list = new ArrayList<>();
+		list.add(new Person(12, "kk", 13));
+		list.add(new Person(12, "kk_1", 13));
+		list.add(new Person(13, "kk_2", 13));
+		list.add(new Person(13, "kk_3", 13));
+		list.add(new Person(14, "kk_4", 13));
+		Map<String, Person> collect = list.stream().collect(Collectors.toMap(Person::getName, e -> e));
+		System.out.println(collect);
+	}
+
 }

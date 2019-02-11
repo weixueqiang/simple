@@ -6,12 +6,9 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -25,19 +22,27 @@ public class AllTest {
 
 	@Test
 	public void s3t() {
-		Set<String> set = new HashSet<String>();
-		set.add("sg");
-		System.out.println("........" + set.add(null));
-		System.out.println("........" + set.add(null));
-		System.out.println(set.size());
+		try {
+			err();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
+	private void err() throws Exception {
+		// TODO Auto-generated method stub
+		throw new Exception();
 	}
 
 	@Test
 	public void st() {
-		Stream<String> stream = Arrays.stream(new String[] { "a", "b" });
-		stream.forEach(System.out::println);
-		stream.forEach(System.out::println);
+		double d = 2.3456;
+		String format = String.format("%.2f", d);
+		System.out.println(format);
+		// BigDecimal dec = new BigDecimal(2.345);
+		// dec.setScale(2);
+		// System.out.println(dec);
 	}
 
 	@Test
