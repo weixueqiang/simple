@@ -1,4 +1,4 @@
-package com.jo.dy.ot.stream;
+package com.jo.dy.ot.stream2;
 
 @FunctionalInterface
 public interface FunctionalInteface {
