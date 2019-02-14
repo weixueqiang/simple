@@ -99,8 +99,31 @@ public class ProduceStream {
 
 	public List<String> tt() {
 		List<String> asList = Arrays.asList("abc", "as");
-		asList = asList.stream().map(String::toUpperCase).collect(Collectors.toList());
+		asList = asList.stream().map(t -> {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return t.toUpperCase();
+		}).collect(Collectors.toList());
 		return asList;
+	}
+
+	@Test
+	public void reallyAsyn() {
+		Stream<String> of = Stream.of("a", "b", "c");
+		of.peek(t -> {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(t.toUpperCase());
+		}).forEach(System.out::println);
+
 	}
 
 	/**
